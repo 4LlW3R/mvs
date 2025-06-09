@@ -1,0 +1,152 @@
+{
+  "type": "record",
+  "name": "AvroTrip",
+  "namespace": "com.epam.tcodata.models.avro.fact",
+  "fields": [
+	    {
+            "name": "durableId",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "ingestedDateUtc",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "subscriptionId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "lineageCode",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "driverDurableKey",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "vehicleDurableKey",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "schemaVersion",
+            "doc": "Transport message support: avro schema version number",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "tripId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "assetId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "driverId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "tripStart",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "tripEnd",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "notes",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "pulseParameterName",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "subTripList",
+            "type": ["null", {"type": "array", "items": "AvroSubTrip"}]
+        },
+	    {
+            "name": "engineSeconds",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "startPositionId",
+            "type": ["null", "long"]
+        },
+		{
+		    "name": "startPosition",
+		    "type": ["null", "AvroPosition"]
+		},
+	    {
+            "name": "endPositionId",
+            "type": ["null", "long"]
+        },
+		{
+		    "name": "endPosition",
+		    "type": ["null", "AvroPosition"]
+		},
+	    {
+            "name": "firstDepart",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "lastHalt",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "drivingTime",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "standingTime",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "duration",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "distanceKilometers",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "startOdometerKilometers",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "endOdometerKilometers",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "startEngineSeconds",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "endEngineSeconds",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "pulseValue",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "fuelUsedLitres",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "maxSpeedKilometersPerHour",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "maxAccelerationKilometersPerHourPerSecond",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "maxDecelerationKilometersPerHourPerSecond",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "maxRpm",
+            "type": ["null", "double"]
+        }
+    ]
+}

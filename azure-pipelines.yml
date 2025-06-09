@@ -1,0 +1,65 @@
+resources:
+  repositories:
+    - repository: pf
+      type: git
+      name: CVX-DevOps/ADOPipeline
+      ref: refs/tags/latest-stable
+
+########################################################
+# WARNING: Removing/Modifying the following Parameters
+# may cause errors with your pipeline!
+########################################################
+parameters:
+  - name: forceUpdate
+    displayName: Update Pipeline
+    type: boolean
+    default: false
+  - name: deployEnvironment
+    displayName: Environment
+    type: string
+    default: dev
+########################################################
+
+trigger: none
+
+stages:
+  - template: pipeline.yml@pf
+    parameters:
+      ${{ insert }}: ${{ parameters }} # DO NOT MODIFY
+      serviceId: 1500000789
+
+      projects:
+        - name: MVSDatalake
+          type: maven
+          filePath: /pom.xml
+          jdkVersionOption: '1.8'
+#          env:
+#            APP_ID: $(app-id)
+#            APP_SECRET: $(app-secret)
+#            VAULT_BASE_URL: $(vault-base-url)
+#            KEY_ID: $(encryption-key-id)
+#            DATALAKE_TOKEN: $(adls-sas)
+#            ARTIFACTS_TOKEN: $(artifacts-sas)
+
+          options: '-Dartifactory_user=$(cvx_artifactory_user) -Dartifactory_token=$(cvx_artifactory_token) -s $(System.DefaultWorkingDirectory)/settings.xml'
+          goals: 'clean install'
+          publishJUnitResults: false
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+
+          playbook: main.yml
+
+          #####################################################
+          # Parameters used to enable/disable jobs
+          #####################################################
+          isBuildActive: false # Enable/disable build step.
+          isSASTScanActive: true # Enable/disable SAST scanning step.
+          isDASTScanActive: false # Enable/disable DAST scanning step.
+          isDeployActive: false # Enable/disable deploy step.
+          isBuildTestActive: false # Enable/disable build tests step.
+          isDeployTestActive: false # Ena
+
+          sonarqube:
+            name: scan
+            scan: true
+            #sqExclusions: '**/*.js,**/*.map,**/*.css, **/Scripts/**, **/Content/**, src/Infrastructure/DAL/Bootstrapper.cs, src/Web/CompositionRoot.cs'
+            additionalProperties: 'sonar.java.binaries=**/target/classes'

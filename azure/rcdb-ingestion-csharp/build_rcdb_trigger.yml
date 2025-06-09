@@ -1,0 +1,18 @@
+parameters:
+  profiles: ""
+  skipTests: false
+  goals: "clean package"
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: "azure/rcdb-ingestion-csharp/pom.xml"
+    goals: "${{ parameters.goals }}"
+    options: "--settings settings.xml -P${{ parameters.profiles }} -e"
+    mavenAuthenticateFeed: false
+    javaHomeOption: "path"
+    jdkDirectory: "$(Build.BinariesDirectory)/jdk1.8.0_192"
+    mavenVersionOption: "path"
+    mavenDirectory: "$(Build.BinariesDirectory)/apache-maven-3.6.1/bin"
+    mavenSetM2Home: true
+  displayName: 'Build rcdb trigger artifact'

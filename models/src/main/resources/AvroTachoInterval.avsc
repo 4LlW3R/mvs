@@ -1,0 +1,15 @@
+{
+    "type": "record",
+    "name": "AvroTachoInterval",
+    "namespace": "com.epam.tcodata.models.avro.fact",
+    "fields": [
+	    {
+            "name": "intervalDateTime",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+        {
+            "name": "data",
+            "type": ["null", {"type": "array", "items": "AvroTachoParameterValue"}]
+        }
+    ]
+}

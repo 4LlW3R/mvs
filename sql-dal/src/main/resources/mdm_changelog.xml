@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="mdm_changelog.xml">
+
+    <!-- Initial the mdm database -->
+    <changeSet id="1" author="Valerii Florov">
+        <createTable tableName="key_rule" remarks="Contains all rules for all dimensions.">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="active" type="boolean" defaultValueBoolean="true"/>
+            <column name="api_version" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="subscription" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="entity" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="natural_key_name" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="key_rule_steps" remarks="Contains all steps for each rule.">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigint">
+                <constraints foreignKeyName="key_rule_fk"  referencedTableName="key_rule" referencedColumnNames="id" nullable="false"/>
+            </column>
+            <column name="rule_type" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ord" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body" type="text"/>
+            <column name="par0" type="nvarchar(100)"/>
+            <column name="par1" type="nvarchar(100)"/>
+            <column name="par2" type="nvarchar(100)"/>
+            <column name="par3" type="nvarchar(100)"/>
+            <column name="par4" type="nvarchar(100)"/>
+            <column name="par5" type="nvarchar(100)"/>
+            <column name="par6" type="nvarchar(100)"/>
+            <column name="par7" type="nvarchar(100)"/>
+            <column name="par8" type="nvarchar(100)"/>
+            <column name="par9" type="nvarchar(100)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="2" author="Valerii Florov">
+        <createTable tableName="key_history" remarks="Contains history of surrogate keys defining.">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="entity" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="natural_key_name" type="nvarchar(50)" />
+            <column name="date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surrogate_key"  type="nvarchar(50)" />
+            <column name="reason"  type="nvarchar(50)" />
+            <column name="old_natural_key" type="nvarchar(50)" />
+            <column name="new_natural_key" type="nvarchar(50)" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="key_history_date"
+                     tableName="key_history"
+                     unique="false">
+            <column name="date" type="timestamp"/>
+        </createIndex>
+        <createIndex indexName="key_history_new_natural_key"
+                     tableName="key_history"
+                     unique="false">
+            <column name="new_natural_key" type="nvarchar(50)"/>
+        </createIndex>
+        <createIndex indexName="key_history_entity"
+                     tableName="key_history"
+                     unique="false">
+            <column name="entity" type="nvarchar(50)"/>
+        </createIndex>
+        <createIndex indexName="key_history_entity_new_natural_key"
+                     tableName="key_history"
+                     unique="false">
+            <column name="entity" type="nvarchar(50)"/>
+            <column name="new_natural_key" type="nvarchar(50)"/>
+        </createIndex>
+
+        <createTable tableName="key_history_details" remarks="Contains fields values that impacted on the key definition.">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigint">
+                <constraints foreignKeyName="key_history_details_fk"  referencedTableName="key_history" referencedColumnNames="id" nullable="false"/>
+            </column>
+            <column name="field_name"  type="nvarchar(50)" />
+            <column name="old_value" type="nvarchar(50)" />
+            <column name="new_value" type="nvarchar(50)" />
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="3" author="Valerii Florov">
+        <createTable tableName="key_rule_relations" remarks="Contains all relations of base entity to other.">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigint">
+                <constraints foreignKeyName="key_rule_relation_fk"  referencedTableName="key_rule" referencedColumnNames="id" nullable="false"/>
+            </column>
+            <column name="entity" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="natural_key_name" type="nvarchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="Valerii Florov">
+        <createTable tableName="key_mapping" remarks="Contains mapping natural keys to surrogate ones.">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="entity" type="nvarchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="natural_key" type="nvarchar(50)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="surrogate_key"  type="nvarchar(50)" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex indexName="key_mapping_natural_key"
+                     tableName="key_mapping"
+                     unique="false">
+            <column name="natural_key" type="nvarchar(50)"/>
+        </createIndex>
+        <createIndex indexName="key_mapping_entity"
+                     tableName="key_mapping"
+                     unique="false">
+            <column name="entity" type="nvarchar(50)"/>
+        </createIndex>
+        <createIndex indexName="key_mapping_entity_natural_key"
+                     tableName="key_mapping"
+                     unique="true">
+            <column name="entity" type="nvarchar(50)"/>
+            <column name="natural_key" type="nvarchar(50)"/>
+        </createIndex>
+
+    </changeSet>
+
+    <changeSet id="5" author="Valerii Florov">
+        <addColumn tableName="key_mapping">
+            <column name="speculative" type="boolean" defaultValueBoolean="false"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="5-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.1.0"/>
+    </changeSet>
+
+    <changeSet id="6" author="Valerii Florov">
+
+        <dropIndex indexName="key_history_date"
+                   tableName="key_history"/>
+        <dropIndex indexName="key_history_new_natural_key"
+                   tableName="key_history"/>
+        <dropIndex indexName="key_history_entity"
+                   tableName="key_history"/>
+        <dropIndex indexName="key_history_entity_new_natural_key"
+                   tableName="key_history"/>
+
+        <dropTable cascadeConstraints="true"
+                   tableName="key_history_details"/>
+        <dropTable cascadeConstraints="true"
+                   tableName="key_history"/>
+    </changeSet>
+
+    <changeSet id="6-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.2.0"/>
+    </changeSet>
+
+    <changeSet id="7" author="Valerii Florov">
+        <addColumn tableName="key_mapping">
+            <column name="key_name" type="nvarchar(50)" defaultValue=""/>
+        </addColumn>
+
+        <sql dbms="mssql" splitStatements="false" endDelimiter=";">
+            UPDATE key_mapping
+            SET key_name = 'driverId'
+            WHERE entity = 'DRIVER';
+
+            UPDATE key_mapping
+            SET key_name = 'assetId'
+            WHERE entity = 'ASSET';
+
+            UPDATE key_mapping
+            SET key_name = 'locationId'
+            WHERE entity = 'LOCATION';
+
+            UPDATE key_mapping
+            SET key_name = 'eventTypeId'
+            WHERE entity = 'LIBRARY_EVENT';
+
+            UPDATE key_mapping
+            SET key_name = 'groupId'
+            WHERE entity = 'ORGANISATION_GROUP';
+
+            UPDATE key_mapping
+            SET key_name = 'groupId'
+            WHERE entity = 'ORGANISATION_SUBGROUP';
+        </sql>
+
+        <createIndex indexName="key_mapping_entity_key_name_natural_key"
+                     tableName="key_mapping"
+                     unique="true">
+            <column name="entity" type="nvarchar(50)"/>
+            <column name="key_name" type="nvarchar(50)"/>
+            <column name="natural_key" type="nvarchar(50)"/>
+        </createIndex>
+    </changeSet>
+
+
+    <changeSet id="7-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.3.0"/>
+    </changeSet>
+
+    <changeSet id="8" author="Valerii Florov">
+        <addColumn tableName="key_rule_relations">
+            <column name="surrogate_key_name" type="nvarchar(100)"/>
+        </addColumn>
+
+        <sql dbms="mssql" splitStatements="false" endDelimiter=";">
+            UPDATE key_rule_relations
+            SET natural_key_name = 'assetId', surrogate_key_name = 'vehicleDurableKey'
+            WHERE natural_key_name = 'vehicleDurableKey';
+
+            UPDATE key_rule_relations
+            SET natural_key_name = 'driverId', surrogate_key_name = 'driverDurableKey'
+            WHERE natural_key_name = 'driverDurableKey';
+        </sql>
+    </changeSet>
+
+    <changeSet id="8-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.4.0"/>
+    </changeSet>
+
+    <changeSet id="9" author="Valerii Florov">
+        <sql dbms="mssql" splitStatements="false" endDelimiter=";">
+            UPDATE key_rule_steps
+            SET par0 = 'driverId', par1 = 'employeeNumber'
+            WHERE body = 'com.epam.tcodata.mdm.rules.DriverDimensionRule';
+        </sql>
+    </changeSet>
+
+    <changeSet id="9-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.5.0"/>
+    </changeSet>
+
+    <changeSet id="10" author="Valerii Florov">
+        <dropColumn schemaName="dbo"
+                    tableName="key_rule"
+                    columnName="natural_key_name"/>
+    </changeSet>
+
+    <changeSet id="10-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.10.0"/>
+    </changeSet>
+
+
+
+    <!--    natural_key_name-->
+    <!--    driverId-->
+    <!--    assetId-->
+    <!--    eventTypeId-->
+    <!--    locationId-->
+    <!--    groupId-->
+    <!--    groupId-->
+    <!--    positionId-->
+    <!--    eventId-->
+    <!--    tripId-->
+    <!--    subTripId-->
+
+
+
+    <changeSet id="11" author="Valerii Florov">
+        <addColumn tableName="key_rule_steps">
+            <column name="natural_key_name" type="nvarchar(50)" defaultValue=""/>
+        </addColumn>
+
+        <sql dbms="mssql" splitStatements="false" endDelimiter=";">
+            UPDATE key_rule_steps
+            SET natural_key_name = 'driverId', par0 = NULL, par1 = NULL
+            WHERE parent_id IN (SELECT id FROM key_rule WHERE entity = 'DRIVER');
+
+            UPDATE key_rule_steps
+            SET natural_key_name = 'assetId', par0 = NULL, par1 = NULL
+            WHERE parent_id IN (SELECT id FROM key_rule WHERE entity = 'ASSET');
+
+            UPDATE key_rule_steps
+            SET natural_key_name = 'eventTypeId', par0 = NULL, par1 = NULL
+            WHERE parent_id IN (SELECT id FROM key_rule WHERE entity = 'LIBRARY_EVENT');
+
+            UPDATE key_rule_steps
+            SET natural_key_name = 'locationId', par0 = NULL, par1 = NULL
+            WHERE parent_id IN (SELECT id FROM key_rule WHERE entity = 'LOCATION');
+
+            UPDATE key_rule_steps
+            SET natural_key_name = 'groupId', par0 = NULL, par1 = NULL
+            WHERE parent_id IN (SELECT id FROM key_rule WHERE entity = 'ORGANISATION_GROUP');
+
+            UPDATE key_rule_steps
+            SET natural_key_name = 'groupId', par0 = NULL, par1 = NULL
+            WHERE parent_id IN (SELECT id FROM key_rule WHERE entity = 'ORGANISATION_SUBGROUP');
+        </sql>
+
+    </changeSet>
+
+    <changeSet id="11-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.11.0"/>
+    </changeSet>
+
+    <changeSet id="12" author="Valerii Florov">
+        <dropIndex indexName="key_mapping_entity_natural_key"
+                   tableName="key_mapping"/>
+
+    </changeSet>
+
+    <changeSet id="12-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.12.0"/>
+    </changeSet>
+
+
+</databaseChangeLog>

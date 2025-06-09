@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "PedestrianCrossing",
+    "id": "pedestrianCrossing.json",
+    "allOf": [
+      {
+        "$ref": "geojson.json"
+      },
+      {
+        "$ref": "definitions.json#/definitions/geojsonProperties"
+      },
+      {
+        "oneOf": [
+          {
+            "$ref": "definitions.json#/definitions/pedestrianCrossing"
+          },
+          {
+            "allOf": [
+              {
+                "$ref": "definitions.json#/definitions/featureCollection"
+              },
+              {
+                "properties": {
+                  "features": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "definitions.json#/definitions/pedestrianCrossing"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

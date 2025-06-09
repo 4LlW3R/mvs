@@ -1,0 +1,23 @@
+{
+    "type": "record",
+    "name": "AvroTachoParameterDefinition",
+    "namespace": "com.epam.tcodata.models.avro.fact",
+    "fields": [
+	    {
+            "name": "key",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "parameterId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "deviceId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "lineName",
+            "type": ["null", "string"]
+        }
+    ]
+}

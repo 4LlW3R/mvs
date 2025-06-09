@@ -1,0 +1,42 @@
+[
+	{
+		"ID": "1",
+		"OrganisationGroupId": "3",
+		"EntityType": "1",
+		"EntitySuperType": "2",
+		"LastSyncDateUtc": "2019-10-21T10:00:09Z",
+		"LastProcessedTime": "2019-11-18T00:00:00Z",
+		"LastSyncResultCode": "200",
+		"LastSyncElementCount": "100",
+		"LastSyncDuration": "00:00:00",
+		"TotalElementsCount": "100",
+		"LastErrorMessage": null
+	},
+	{
+		"ID": "2",
+		"OrganisationGroupId": "3",
+		"EntityType": "2",
+		"EntitySuperType": "2",
+		"LastSyncDateUtc": "2019-10-21T10:00:09Z",
+		"LastProcessedTime": "2019-11-18T00:00:00Z",
+		"LastSyncResultCode": "200",
+		"LastSyncElementCount": "100",
+		"LastSyncDuration": "00:00:00",
+		"TotalElementsCount": "100",
+		"LastErrorMessage": null
+	},
+	{
+		"ID": "3",
+		"OrganisationGroupId": "3",
+		"EntityType": "3",
+		"EntitySuperType": "2",
+		"LastSyncDateUtc": "2019-10-21T10:00:09Z",
+		"LastProcessedTime": "2019-11-18T00:00:00Z",
+		"LastSyncResultCode": "200",
+		"LastSyncElementCount": "100",
+		"LastSyncDuration": "00:00:00",
+		"TotalElementsCount": "100",
+		"LastErrorMessage": null
+	}
+
+]

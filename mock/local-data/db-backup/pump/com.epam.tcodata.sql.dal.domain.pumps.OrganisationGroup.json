@@ -1,0 +1,22 @@
+[
+
+	{
+		"ID": "3",
+		"AccountId": "2",
+		"GroupId": "-8463266206350882415",
+		"Type": "OrganisationGroup",
+		"DisplayTimeZone": "Pakistan Standard Time",
+		"Name": "BTS - Sicim Kazakhstan (Tcon)",
+		"Active": true
+	},
+	{
+		"ID": "4",
+		"AccountId": "2",
+		"GroupId": "-2798803471322033848",
+		"Type": "OrganisationGroup",
+		"DisplayTimeZone": "Pakistan Standard Time",
+		"Name": "BTS - Sicim Kazakhstan (Tcon) 2",
+		"Active": true
+	}
+]
+

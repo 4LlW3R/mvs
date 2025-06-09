@@ -1,0 +1,14 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "myEventHubMessage",
+      "direction": "in",
+      "path": "${eventhub.road-conditions.topicName}",
+      "connection": "${eventhub.road-conditions.namespace}_${eventhub.road-conditions.sharedAccessKeyName}_EVENTHUB",
+      "consumerGroup": "${eventhub.road-conditions.consumerGroup}",
+      "cardinality": "many"
+    }
+  ],
+  "disabled": false
+}

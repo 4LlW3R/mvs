@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>tco-mvs</artifactId>
+        <groupId>com.epam.tcodata</groupId>
+        <version>1.8.0-RC</version>
+    </parent>
+
+    <artifactId>analytics</artifactId>
+    <packaging>pom</packaging>
+    <name>analytics</name>
+    <description>Takes output of overtaking and detects violations in it</description> <!-- TO DO add to description, make it full -->
+
+    <modules>
+        <module>./java/overtaking-detection</module>
+        <module>./java/overtaking-violation-detection</module>
+        <module>./java/events-data-contracts-avro</module>
+        <module>./java/road-condition-violation-detection</module>
+    </modules>
+</project>

@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.internal.pump.driver.InternalPumpStreamDriver",
+  "--name",
+  "InternalPump_Tacho",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvstestadltco/tmp/logs/InternalPump_Tacho -Dlog4j.configuration=file:/dbfs/mnt/mvstestadltco/distr/internal-pumps/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvstestadltco/tmp/logs/InternalPump_Tacho -Dlog4j.configuration=file:/dbfs/mnt/mvstestadltco/distr/internal-pumps/log4j.properties",
+  "dbfs:/mnt/mvstestadltco/distr/internal-pumps/internal-pumps-1.9.0-SNAPSHOT.jar",
+  "--factoryClassName",
+  "com.epam.tcodata.internal.pump.factory.fact.InternalTachoFactory",
+  "--batchIntervalSeconds",
+  "60"
+]

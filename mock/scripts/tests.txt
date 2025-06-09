@@ -1,0 +1,49 @@
+# Using this script:
+# java -jar mock-1.8.0-RC.jar --input="./temp/starter/tests.txt" --backup="./temp/starter/backup" --output="./temp/starter/output.txt" --version=VERSION_1_0
+# you need to create the path 'temp/starter' near to the jar file
+
+# This is a comment line. It will be ignored during the test
+# The format of these lines as follows:
+# Command;Expected;Relation;Entity;ApiVersion;Subscription;EntityType
+# Commands: V[ariable], B[ackup], R[estore], S[ubscriptions], F[indOrCreate], K[eysSubstitution]
+# Expected: a value that should be compared with actual result, for B and R command just contains additional
+# path where to store/restore a backup of mdm database.
+# Relation: == != < >
+# Entity: json representation of entity
+# ApiVersion: API_1_0, API_2_0
+# Subscription: as is
+# EntityType: POSITION, EVENT, TRIP, SUBTRIP, DRIVER, ASSET, LIBRARY_EVENT, LOCATION
+#
+# Examples of command you can find below
+
+# the following V command introduce a variable with name "pos1"
+# and value "{"Timestamp":"2018-12-23T10:00:00Z".... "PositionId":813495754958802949}"
+# both - name and value are strings. you can use the value in fields Expected, Entity, ApiVersion, Subscription,
+# EntityType just placing ${pos1} instead of real value.
+V;pos1={"Timestamp":"2018-12-23T10:00:00Z","Longitude":53.445499420166,"Latitude":46.3059730529785,"DriverId":-9206978148620878804,"AssetId":-4405764896946247992,"PositionId":813495754958802949}
+# one move variable
+V;exp1={"driverDurableKey":"00000000-0000-0000-c000-000000000046"}
+
+# R command restores the whole database of KeyManager from given directory "in". The full path is assembled from command
+# line parameter (--backup= ... ) and the this value.
+R;in
+
+# S command checks the subscriptions that KeyManager 'knows'. In this case Expected field should be filled with
+# comma separated strings that represent separate values.
+S;102,*;==
+
+# K command checks that KeyManager properly assign durable keys for every natural keys in given event entity.
+K;${exp1};==;${pos1};API_1_0;102;POSITION
+
+
+V;drv={"IsSystemDriver": false,"FmDriverId": 5252,"DriverId":-9206978148620878804,"SiteId":-9168865442510212415,"ExtendedDriverIdType":"None","Country":"KZ","EmployeeNumber": "12878195","Name":"Kadyrbay Gabiden, 12878195, 13778"  },
+# F command checks that KeyManager properly finds (or creates) a UUID for given dimension entity.
+#F;{"uuid":"00000000-0000-0000-0000-000000000000", "reason":"NEW_KEY"};!=;${drv};API_1_0;102;DRIVER
+F;{"reason":"NEW_KEY"};==;${drv};API_1_0;102;DRIVER
+
+V;exp2={"driverDurableKey":"00000000-0000-0000-c000-000000000046"}
+K;${exp2};!=;${pos1};API_1_0;102;POSITION
+
+# B command backups the whole database of KeyManager into given directory in the same format as R command uses.
+# You can use such possibility to check history table for example.
+B;out

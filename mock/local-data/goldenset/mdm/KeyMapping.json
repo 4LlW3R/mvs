@@ -1,0 +1,450 @@
+[
+  {
+    "id": 1,
+    "entity": "DRIVER",
+    "naturalKey": "4941830415588775098",
+    "surrogateKey": "658871cf-6663-4346-933d-8f0d1583a72d",
+    "speculative": false,
+    "parentId": -1
+  },
+  {
+    "id": 2,
+    "entity": "ASSET",
+    "naturalKey": "3376714286149678154",
+    "surrogateKey": "00000006-0000-0000-0000-001125221722",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 3,
+    "entity": "DRIVER",
+    "naturalKey": "7421286282944924906",
+    "surrogateKey": "00000005-0000-0000-0000-001497672645",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 4,
+    "entity": "ASSET",
+    "naturalKey": "4179657326617083647",
+    "surrogateKey": "00000006-0000-0000-0000-001769799564",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 5,
+    "entity": "DRIVER",
+    "naturalKey": "-7599803016268782079",
+    "surrogateKey": "00000005-0000-0000-0000-000420610288",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 6,
+    "entity": "ASSET",
+    "naturalKey": "-8104699885568157425",
+    "surrogateKey": "00000006-0000-0000-0000-002025260050",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 7,
+    "entity": "ASSET",
+    "naturalKey": "1465933081557911737",
+    "surrogateKey": "00000006-0000-0000-0000-001109204967",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 8,
+    "entity": "DRIVER",
+    "naturalKey": "-4177538055344004478",
+    "surrogateKey": "00000005-0000-0000-0000-001035660180",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 9,
+    "entity": "ASSET",
+    "naturalKey": "-519444242362810483",
+    "surrogateKey": "00000006-0000-0000-0000-000928061723",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 10,
+    "entity": "DRIVER",
+    "naturalKey": "-5328044115137671255",
+    "surrogateKey": "00000005-0000-0000-0000-000374868577",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 11,
+    "entity": "ASSET",
+    "naturalKey": "921522149145477120",
+    "surrogateKey": "00000006-0000-0000-0000-001712743764",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 12,
+    "entity": "ASSET",
+    "naturalKey": "879092567137849344",
+    "surrogateKey": "00000006-0000-0000-0000-000364816164",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 13,
+    "entity": "DRIVER",
+    "naturalKey": "-3491648455739209356",
+    "surrogateKey": "00000005-0000-0000-0000-001699359958",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 14,
+    "entity": "ASSET",
+    "naturalKey": "872907724446945280",
+    "surrogateKey": "00000006-0000-0000-0000-000464177946",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 15,
+    "entity": "ASSET",
+    "naturalKey": "6226305342171066981",
+    "surrogateKey": "00000006-0000-0000-0000-001652806452",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 16,
+    "entity": "DRIVER",
+    "naturalKey": "-5652843881232195009",
+    "surrogateKey": "00000005-0000-0000-0000-001732905848",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 17,
+    "entity": "ASSET",
+    "naturalKey": "-5449572980924201758",
+    "surrogateKey": "00000006-0000-0000-0000-000107243344",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 18,
+    "entity": "DRIVER",
+    "naturalKey": "-4862285131938080617",
+    "surrogateKey": "00000005-0000-0000-0000-001743932357",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 19,
+    "entity": "ASSET",
+    "naturalKey": "122382158829373469",
+    "surrogateKey": "00000006-0000-0000-0000-001798264591",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 20,
+    "entity": "ASSET",
+    "naturalKey": "5772472613797639582",
+    "surrogateKey": "00000006-0000-0000-0000-000296112194",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 21,
+    "entity": "ASSET",
+    "naturalKey": "922159174957060096",
+    "surrogateKey": "00000006-0000-0000-0000-001905555244",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 22,
+    "entity": "ASSET",
+    "naturalKey": "-1049432765879224556",
+    "surrogateKey": "00000006-0000-0000-0000-001679911592",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 23,
+    "entity": "ASSET",
+    "naturalKey": "-1166045992010043255",
+    "surrogateKey": "00000006-0000-0000-0000-001806636676",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 24,
+    "entity": "DRIVER",
+    "naturalKey": "-1397824105393333191",
+    "surrogateKey": "00000005-0000-0000-0000-001742585690",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 25,
+    "entity": "ASSET",
+    "naturalKey": "-5094965205119183046",
+    "surrogateKey": "00000006-0000-0000-0000-001448288637",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 26,
+    "entity": "ASSET",
+    "naturalKey": "872485509253578752",
+    "surrogateKey": "00000006-0000-0000-0000-000847932878",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 27,
+    "entity": "ASSET",
+    "naturalKey": "5550435176033354264",
+    "surrogateKey": "00000006-0000-0000-0000-001176083161",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 28,
+    "entity": "DRIVER",
+    "naturalKey": "363402409314370962",
+    "surrogateKey": "00000005-0000-0000-0000-000816359272",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 29,
+    "entity": "ASSET",
+    "naturalKey": "-5215822116327007481",
+    "surrogateKey": "00000006-0000-0000-0000-000886345346",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 30,
+    "entity": "DRIVER",
+    "naturalKey": "7236478017900078581",
+    "surrogateKey": "00000005-0000-0000-0000-001495086391",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 31,
+    "entity": "ASSET",
+    "naturalKey": "-2620112823676695577",
+    "surrogateKey": "00000006-0000-0000-0000-002012979778",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 32,
+    "entity": "ASSET",
+    "naturalKey": "-5372055296744066951",
+    "surrogateKey": "00000006-0000-0000-0000-000205517783",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 33,
+    "entity": "ASSET",
+    "naturalKey": "8535276958650378757",
+    "surrogateKey": "00000006-0000-0000-0000-001593880268",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 34,
+    "entity": "DRIVER",
+    "naturalKey": "2208629312278023478",
+    "surrogateKey": "00000005-0000-0000-0000-000548167544",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 35,
+    "entity": "ASSET",
+    "naturalKey": "7576177725317256939",
+    "surrogateKey": "00000006-0000-0000-0000-000863059455",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 36,
+    "entity": "ASSET",
+    "naturalKey": "-8414127389365629776",
+    "surrogateKey": "00000006-0000-0000-0000-000931645409",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 37,
+    "entity": "ASSET",
+    "naturalKey": "6789880142860527835",
+    "surrogateKey": "00000006-0000-0000-0000-001404759665",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 38,
+    "entity": "ASSET",
+    "naturalKey": "-2478505135306826675",
+    "surrogateKey": "00000006-0000-0000-0000-000377430792",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 39,
+    "entity": "DRIVER",
+    "naturalKey": "1106776979484840201",
+    "surrogateKey": "00000005-0000-0000-0000-001729002404",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 40,
+    "entity": "ASSET",
+    "naturalKey": "-2904959143678944508",
+    "surrogateKey": "00000006-0000-0000-0000-001763614640",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 41,
+    "entity": "DRIVER",
+    "naturalKey": "-6371896243426218658",
+    "surrogateKey": "00000005-0000-0000-0000-001480265368",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 42,
+    "entity": "ASSET",
+    "naturalKey": "1410800449977243131",
+    "surrogateKey": "00000006-0000-0000-0000-002122395508",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 43,
+    "entity": "ASSET",
+    "naturalKey": "-122385421598003406",
+    "surrogateKey": "00000006-0000-0000-0000-001745083444",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 44,
+    "entity": "ASSET",
+    "naturalKey": "-7340259278037212306",
+    "surrogateKey": "00000006-0000-0000-0000-001259576280",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 45,
+    "entity": "ASSET",
+    "naturalKey": "-8336823685292921913",
+    "surrogateKey": "00000006-0000-0000-0000-001645718121",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 46,
+    "entity": "ASSET",
+    "naturalKey": "-7259865206982019500",
+    "surrogateKey": "00000006-0000-0000-0000-001062662179",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 47,
+    "entity": "ASSET",
+    "naturalKey": "-8425377741720298757",
+    "surrogateKey": "00000006-0000-0000-0000-001381250960",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 48,
+    "entity": "ASSET",
+    "naturalKey": "-482978556861051668",
+    "surrogateKey": "00000006-0000-0000-0000-001031220706",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 49,
+    "entity": "DRIVER",
+    "naturalKey": "-7724460251104259852",
+    "surrogateKey": "00000005-0000-0000-0000-001537645733",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 50,
+    "entity": "ASSET",
+    "naturalKey": "-5683838349157995290",
+    "surrogateKey": "00000006-0000-0000-0000-002070887907",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 51,
+    "entity": "ASSET",
+    "naturalKey": "621579175824882407",
+    "surrogateKey": "00000006-0000-0000-0000-000082371478",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 52,
+    "entity": "ASSET",
+    "naturalKey": "3975102936164125748",
+    "surrogateKey": "00000006-0000-0000-0000-000783933961",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 53,
+    "entity": "ASSET",
+    "naturalKey": "8057889423914957933",
+    "surrogateKey": "00000006-0000-0000-0000-000093752324",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 54,
+    "entity": "DRIVER",
+    "naturalKey": "8792698881560097676",
+    "surrogateKey": "00000005-0000-0000-0000-000120429794",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 55,
+    "entity": "ASSET",
+    "naturalKey": "-6574785770521487631",
+    "surrogateKey": "00000006-0000-0000-0000-001941133744",
+    "speculative": true,
+    "parentId": -1
+  },
+  {
+    "id": 56,
+    "entity": "DRIVER",
+    "naturalKey": "4619780810505044831",
+    "surrogateKey": "00000005-0000-0000-0000-001206631534",
+    "speculative": true,
+    "parentId": -1
+  }
+]

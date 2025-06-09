@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- to be added either to user profile maven configuration at
+    ${user.home}/.m2/settings.xml
+    or to global maven settings at
+    ${maven.home}/conf/settings.xml
+-->
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<!--
+ | This is the configuration file for Maven. It can be specified at two levels:
+ |
+ |  1. User Level. This settings.xml file provides configuration for a single user,
+ |                 and is normally provided in ${user.home}/.m2/settings.xml.
+ |
+ |                 NOTE: This location can be overridden with the CLI option:
+ |
+ |                 -s /path/to/user/settings.xml
+ |
+ |  2. Global Level. This settings.xml file provides configuration for all Maven
+ |                 users on a machine (assuming they're all using the same Maven
+ |                 installation). It's normally provided in
+ |                 ${maven.conf}/settings.xml.
+ |
+ |                 NOTE: This location can be overridden with the CLI option:
+ |
+ |                 -gs /path/to/global/settings.xml
+ |
+ | The sections in this sample file are intended to give you a running start at
+ | getting the most out of your Maven installation. Where appropriate, the default
+ | values (values used when the setting is not specified) are provided.
+ |
+ |-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"
+>
+    <servers>
+        <server>
+            <id>chevron-visualstudio.com-mvs-ci-dev</id>
+            <configuration>
+                <httpHeaders>
+                    <property>
+                        <name>Authorization</name>
+                        <!-- Treat this auth token like a password. Do not share it with anyone, including Microsoft support. -->
+                        <!-- The generated token expires on or before 2/20/2018 -->
+                        <value>${mavenAuthToken}</value>
+                    </property>
+                </httpHeaders>
+            </configuration>
+        </server>
+    </servers>
+
+    <profiles>
+
+        <!-- profiles should all be the same (as env-dev) with different values -->
+        <profile>
+            <id>env-stg</id>
+            <properties>
+                <environment.type>stg</environment.type>
+
+                <hive.raw.database>raw</hive.raw.database>
+                <hive.prepared.database>prepared</hive.prepared.database>
+
+                <fact-dim.eventHub.namespace>event-hub-mvsdatalake-p332stage-namespace</fact-dim.eventHub.namespace>
+                <overtaking.eventHub.namespace>event-hub-mvsdatalake-p332stage-namespace1</overtaking.eventHub.namespace>
+                <road-condition.eventHub.namespace>event-hub-mvsdatalake-p332stage-namespace2</road-condition.eventHub.namespace>
+                <confirmed-overtaking.eventHub.namespace>event-hub-mvsdatalake-p332stage-namespace3</confirmed-overtaking.eventHub.namespace>
+
+                <pump-azure-sql.hostname>mvsdatalakep332stagetco.database.windows.net</pump-azure-sql.hostname>
+                <pump-azure-sql.port>1433</pump-azure-sql.port>
+                <pump-azure-sql.database>mvsdatalakep332stagetco</pump-azure-sql.database>
+
+                <speedlayer-azure-sql.hostname>mvsdatalakep332stagetco.database.windows.net</speedlayer-azure-sql.hostname>
+                <speedlayer-azure-sql.port>1433</speedlayer-azure-sql.port>
+                <speedlayer-azure-sql.database>mvsdatalakep332stagetco1</speedlayer-azure-sql.database>
+
+                <key-manager.keyFactoryClass>com.epam.tcodata.mdm.base.impl.KeyFactory</key-manager.keyFactoryClass>
+
+                <mdm-azure-sql.hostname>mvsdatalakep332stagetco1.database.windows.net</mdm-azure-sql.hostname>
+                <mdm-azure-sql.port>1433</mdm-azure-sql.port>
+                <mdm-azure-sql.database>mvsdatalakep332stagetco2</mdm-azure-sql.database>
+
+                <redis.host>mvsdatalake-p332stage-tco.redis.cache.windows.net</redis.host>
+                <redis.port>6380</redis.port>
+                <redis.use.ssl>true</redis.use.ssl>
+
+                <organisation-group-pump.account-name>tcomixstg@tengizchevroil.com</organisation-group-pump.account-name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>env-dev</id>
+            <properties>
+                <environment.type>dev</environment.type>
+
+                <hive.raw.database>raw</hive.raw.database>
+                <hive.prepared.database>prepared</hive.prepared.database>
+
+                <fact-dim.eventHub.namespace>event-hub-mvsdatalake-t332dev-namespace</fact-dim.eventHub.namespace>
+                <overtaking.eventHub.namespace>event-hub-mvsdatalake-t332dev-namespace1</overtaking.eventHub.namespace>
+                <road-condition.eventHub.namespace>event-hub-mvsdatalake-t332dev-namespace2</road-condition.eventHub.namespace>
+                <confirmed-overtaking.eventHub.namespace>event-hub-mvsdatalake-t332dev-namespace3</confirmed-overtaking.eventHub.namespace>
+
+                <pump-azure-sql.hostname>mvsdatalaket332devtco.database.windows.net</pump-azure-sql.hostname>
+                <pump-azure-sql.port>1433</pump-azure-sql.port>
+                <pump-azure-sql.database>mvsdatalaket332devtco</pump-azure-sql.database>
+
+                <speedlayer-azure-sql.hostname>mvsdatalaket332devtco.database.windows.net</speedlayer-azure-sql.hostname>
+                <speedlayer-azure-sql.port>1433</speedlayer-azure-sql.port>
+                <speedlayer-azure-sql.database>mvsdatalaket332devtco1</speedlayer-azure-sql.database>
+
+                <mdm-azure-sql.hostname>mvsdatalaket332devtco1.database.windows.net</mdm-azure-sql.hostname>
+                <mdm-azure-sql.port>1433</mdm-azure-sql.port>
+                <mdm-azure-sql.database>mvsdatalaket332devtco2</mdm-azure-sql.database>
+
+                <redis.host>mvsdatalake-t332dev-tco.redis.cache.windows.net</redis.host>
+                <redis.port>6380</redis.port>
+                <redis.use.ssl>true</redis.use.ssl>
+
+                <organisation-group-pump.account-name>tcomixapi@tengizchevroil.com</organisation-group-pump.account-name>
+            </properties>
+        </profile>
+
+        <!-- profiles should all be the same (as env-dev) with different values -->
+        <profile>
+            <id>env-qa-e2e</id>
+            <properties>
+                <environment.type>qa-e2e</environment.type>
+
+                <hive.raw.database>raw</hive.raw.database>
+                <hive.prepared.database>prepared</hive.prepared.database>
+
+                <fact-dim.eventHub.namespace>event-hub-mvsdatalake-t332test-namespace</fact-dim.eventHub.namespace>
+                <overtaking.eventHub.namespace>event-hub-mvsdatalake-t332test-namespace1</overtaking.eventHub.namespace>                
+                <road-condition.eventHub.namespace>event-hub-mvsdatalake-t332test-namespace2</road-condition.eventHub.namespace>                
+                <confirmed-overtaking.eventHub.namespace>event-hub-mvsdatalake-t332test-namespace3</confirmed-overtaking.eventHub.namespace>
+
+                <pump-azure-sql.hostname>mvsdatalaket332testtco.database.windows.net</pump-azure-sql.hostname>
+                <pump-azure-sql.port>1433</pump-azure-sql.port>
+                <pump-azure-sql.database>mvsdatalaket332testtco</pump-azure-sql.database>                
+
+                <speedlayer-azure-sql.hostname>mvsdatalaket332testtco.database.windows.net</speedlayer-azure-sql.hostname>
+                <speedlayer-azure-sql.port>1433</speedlayer-azure-sql.port>
+                <speedlayer-azure-sql.database>mvsdatalaket332testtco1</speedlayer-azure-sql.database>
+
+                <key-manager.keyFactoryClass>com.epam.tcodata.mdm.base.impl.KeyFactory</key-manager.keyFactoryClass>
+
+                <mdm-azure-sql.hostname>mvsdatalaket332testtco1.database.windows.net</mdm-azure-sql.hostname>
+                <mdm-azure-sql.port>1433</mdm-azure-sql.port>
+                <mdm-azure-sql.database>mvsdatalaket332testtco2</mdm-azure-sql.database>
+
+                <redis.host>mvsdatalake-t332test-tco.redis.cache.windows.net</redis.host>
+                <redis.port>6380</redis.port>
+                <redis.use.ssl>true</redis.use.ssl>
+
+                <organisation-group-pump.account-name>vadim_volkov@epam.com</organisation-group-pump.account-name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>env-qa-manual</id>
+            <properties>
+                <environment.type>qa-manual</environment.type>
+
+                <hive.raw.database>raw</hive.raw.database>
+                <hive.prepared.database>prepared</hive.prepared.database>
+
+                <fact-dim.eventHub.namespace>event-hub-mvsdatalake-t332mqa-namespace</fact-dim.eventHub.namespace>
+                <overtaking.eventHub.namespace>event-hub-mvsdatalake-t332mqa-namespace1</overtaking.eventHub.namespace>
+                <road-condition.eventHub.namespace>event-hub-mvsdatalake-t332mqa-namespace2</road-condition.eventHub.namespace>
+                <confirmed-overtaking.eventHub.namespace>event-hub-mvsdatalake-t332mqa-namespace3</confirmed-overtaking.eventHub.namespace>
+
+                <pump-azure-sql.hostname>mvsdatalaket332mqatco.database.windows.net</pump-azure-sql.hostname>
+                <pump-azure-sql.port>1433</pump-azure-sql.port>
+                <pump-azure-sql.database>mvsdatalaket332mqatco</pump-azure-sql.database>
+
+                <speedlayer-azure-sql.hostname>mvsdatalaket332mqatco.database.windows.net</speedlayer-azure-sql.hostname>
+                <speedlayer-azure-sql.port>1433</speedlayer-azure-sql.port>
+                <speedlayer-azure-sql.database>mvsdatalaket332mqatco1</speedlayer-azure-sql.database>
+
+                <key-manager.keyFactoryClass>com.epam.tcodata.mdm.base.impl.KeyFactory</key-manager.keyFactoryClass>
+
+                <mdm-azure-sql.hostname>mvsdatalaket332mqatco1.database.windows.net</mdm-azure-sql.hostname>
+                <mdm-azure-sql.port>1433</mdm-azure-sql.port>
+                <mdm-azure-sql.database>mvsdatalaket332mqatco2</mdm-azure-sql.database>
+
+                <redis.host>mvsdatalake-t332mqa-tco.redis.cache.windows.net</redis.host>
+                <redis.port>6380</redis.port>
+                <redis.use.ssl>true</redis.use.ssl>
+
+                <organisation-group-pump.account-name>tcomixqa@tengizchevroil.com</organisation-group-pump.account-name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>env-qa-integration</id>
+            <properties>
+                <environment.type>qa-integration</environment.type>
+
+                <hive.raw.database>raw</hive.raw.database>
+                <hive.prepared.database>prepared</hive.prepared.database>
+
+                <fact-dim.eventHub.namespace>event-hub-mvsdatalake-t332integ-namespace</fact-dim.eventHub.namespace>
+                <overtaking.eventHub.namespace>event-hub-mvsdatalake-t332integ-namespace1</overtaking.eventHub.namespace>
+                <road-condition.eventHub.namespace>event-hub-mvsdatalake-t332integ-namespace2</road-condition.eventHub.namespace>
+                <confirmed-overtaking.eventHub.namespace>event-hub-mvsdatalake-t332integ-namespace3</confirmed-overtaking.eventHub.namespace>
+
+                <pump-azure-sql.hostname>mvsdatalaket332integtco.database.windows.net</pump-azure-sql.hostname>
+                <pump-azure-sql.port>1433</pump-azure-sql.port>
+                <pump-azure-sql.database>mvsdatalaket332integtco</pump-azure-sql.database>
+
+                <speedlayer-azure-sql.hostname>mvsdatalaket332integtco.database.windows.net</speedlayer-azure-sql.hostname>
+                <speedlayer-azure-sql.port>1433</speedlayer-azure-sql.port>
+                <speedlayer-azure-sql.database>mvsdatalaket332integtco1</speedlayer-azure-sql.database>
+
+                <key-manager.keyFactoryClass>com.epam.tcodata.mdm.base.impl.KeyFactory</key-manager.keyFactoryClass>
+
+                <mdm-azure-sql.hostname>mvsdatalaket332integtco1.database.windows.net</mdm-azure-sql.hostname>
+                <mdm-azure-sql.port>1433</mdm-azure-sql.port>
+                <mdm-azure-sql.database>mvsdatalaket332integtco2</mdm-azure-sql.database>
+
+                <redis.host>mvsdatalake-t332integ-tco.redis.cache.windows.net</redis.host>
+                <redis.port>6380</redis.port>
+                <redis.use.ssl>true</redis.use.ssl>
+
+                <organisation-group-pump.account-name>tcomixprod@tengizchevroil.com</organisation-group-pump.account-name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>env-prod</id>
+            <properties>
+                <environment.type>prod</environment.type>
+
+                <hive.raw.database>raw</hive.raw.database>
+                <hive.prepared.database>prepared</hive.prepared.database>
+
+                <fact-dim.eventHub.namespace>event-hub-mvsdatalake-p332prod-namespace</fact-dim.eventHub.namespace>
+                <overtaking.eventHub.namespace>event-hub-mvsdatalake-p332prod-namespace1</overtaking.eventHub.namespace>
+                <road-condition.eventHub.namespace>event-hub-mvsdatalake-p332prod-namespace2</road-condition.eventHub.namespace>
+                <confirmed-overtaking.eventHub.namespace>event-hub-mvsdatalake-p332prodnamespace3</confirmed-overtaking.eventHub.namespace>
+
+                <pump-azure-sql.hostname>mvsdatalakep332prodtco.database.windows.net</pump-azure-sql.hostname>
+                <pump-azure-sql.port>1433</pump-azure-sql.port>
+                <pump-azure-sql.database>mvsdatalakep332prodtco</pump-azure-sql.database>
+
+                <speedlayer-azure-sql.hostname>mvsdatalakep332prodtco.database.windows.net</speedlayer-azure-sql.hostname>
+                <speedlayer-azure-sql.port>1433</speedlayer-azure-sql.port>
+                <speedlayer-azure-sql.database>mvsdatalakep332prodtco1</speedlayer-azure-sql.database>
+
+                <key-manager.keyFactoryClass>com.epam.tcodata.mdm.base.impl.KeyFactory</key-manager.keyFactoryClass>
+
+                <mdm-azure-sql.hostname>mvsdatalakep332prodtco1.database.windows.net</mdm-azure-sql.hostname>
+                <mdm-azure-sql.port>1433</mdm-azure-sql.port>
+                <mdm-azure-sql.database>mvsdatalakep332prodtco2</mdm-azure-sql.database>
+
+                <redis.host>mvsdatalake-p332prod-tco.redis.cache.windows.net</redis.host>
+                <redis.port>6380</redis.port>
+                <redis.use.ssl>true</redis.use.ssl>
+
+                <organisation-group-pump.account-name>tcomixprod@tengizchevroil.com</organisation-group-pump.account-name>
+            </properties>
+        </profile>
+
+    </profiles>
+
+</settings>

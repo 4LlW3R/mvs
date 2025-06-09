@@ -1,0 +1,56 @@
+<FindBugsFilter>
+    <!-- TO DO make actual -->
+    <Match>
+        <Class name="com.epam.tcodata.spark.streaming.soap.direct.SoapRDD"/>
+        <Bug code="VO"/>
+    </Match>
+
+    <Match>
+        <Class name="com.epam.tcodata.spark.streaming.soap.direct.DirectSoapInputStream$OffsetSupplier"/>
+        <Bug code="Se"/>
+    </Match>
+
+    <Match>
+        <Class name="com.epam.tcodata.storage.repository.configdb.ConfigurationDB"/>
+        <Bug code="NP"/>
+    </Match>
+
+    <Match>
+        <Class name="com.epam.tcodata.storage.repository.configdb.NamedParamStatement"/>
+        <Bug code="SE,SQL"/>
+    </Match>
+
+    <Match>
+        <Class name="com.epam.tcodata.storage.repository.configdb.SQLUtils"/>
+        <Bug code="DE"/>
+    </Match>
+
+    <Match>
+        <Class name="com.epam.tcodata.storage.repository.configdb.SQLHelper"/>
+        <Bug code="DE"/>
+    </Match>
+
+    <Match>
+        <Class name="com.epam.tcodata.spark.streaming.drivers.TrackableFactSoapRDD"/>
+        <Bug code="EI,EI2"/>
+    </Match>
+
+    <Match>
+        <Class name="com.epam.tcodata.spark.streaming.drivers.TrackableFactDirectSoapInputStream"/>
+        <Bug code="Se"/>
+    </Match>
+
+    <!-- Disable validation of WSDL-generated code in 'external/mix-telematics' module -->
+    <Match>
+        <Package name="com.mixtelematics.webservices[.a-zA-Z0-9]*"/>
+    </Match>
+
+    <Match>
+        <Package name="com.omnibridge.sdkwebservices[.a-zA-Z0-9]*"/>
+    </Match>
+
+    <!-- Disable validation of Avro-generated code in 'data-contracts-avro' module -->
+    <Match>
+        <Package name="com.epam.tcodata.Storage.Avro.Entities.Telemetry[.a-zA-Z0-9]*"/>
+    </Match>
+</FindBugsFilter>

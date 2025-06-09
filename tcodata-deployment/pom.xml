@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>tco-mvs</artifactId>
+        <groupId>com.epam.tcodata</groupId>
+        <version>1.8.0-RC</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>tcodata-deployment</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <deployment.dir.name>tco-mvs-deployment-${project.parent.version}</deployment.dir.name>
+        <deployment.dir>${project.build.directory}/${deployment.dir.name}</deployment.dir>
+
+        <deployment.event-validator.dir>${deployment.dir}/event-validator</deployment.event-validator.dir>
+        <deployment.external-pumps.dir>${deployment.dir}/external-pumps</deployment.external-pumps.dir>
+        <deployment.internal-pumps.dir>${deployment.dir}/internal-pumps</deployment.internal-pumps.dir>
+        <deployment.raw-prepared-etl.dir>${deployment.dir}/raw-prepared-etl</deployment.raw-prepared-etl.dir>
+        <deployment.overtaking-detection.dir>${deployment.dir}/overtaking-detection</deployment.overtaking-detection.dir>
+        <deployment.overtaking-violation-detection.dir>${deployment.dir}/overtaking-violation-detection</deployment.overtaking-violation-detection.dir>
+        <deployment.overtaking-violation-stream-datalake.dir>${deployment.dir}/overtaking-violation-stream-datalake</deployment.overtaking-violation-stream-datalake.dir>
+        <deployment.road-condition-violation-detection.dir>${deployment.dir}/road-condition-violation-detection</deployment.road-condition-violation-detection.dir>
+        <deployment.road-condition-violation-stream-datalake.dir>${deployment.dir}/road-condition-violation-stream-datalake</deployment.road-condition-violation-stream-datalake.dir>
+        <deployment.token-manager.dir>${deployment.dir}/token-manager</deployment.token-manager.dir>
+        <deployment.application-manager.dir>${deployment.dir}/application-manager</deployment.application-manager.dir>
+        <deployment.sql-dal.dir>${deployment.dir}/sql-dal</deployment.sql-dal.dir>
+        <deployment.redis-dal.dir>${deployment.dir}/redis-dal</deployment.redis-dal.dir>
+        <deployment.mdm.dir>${deployment.dir}/mdm</deployment.mdm.dir>
+        <deployment.mock.dir>${deployment.dir}/mock</deployment.mock.dir>
+        <deployment.redis-manager.dir>${deployment.dir}/redis-manager</deployment.redis-manager.dir>
+        <deployment.secure-storage-dal.dir>${deployment.dir}/secure-storage-dal</deployment.secure-storage-dal.dir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>event-validator</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>external-pumps</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>token-manager</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>application-manager</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>internal-pumps</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>raw-prepared-etl</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>overtaking-detection</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>overtaking-violation-detection</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>overtaking-violation-stream-datalake</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>road-condition-violation-detection</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>road-condition-violation-stream-datalake</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>sql-dal</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>redis-dal</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>mdm</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>redis-manager</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.epam.tcodata</groupId>
+            <artifactId>secure-storage-dal</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>tcodata-deployment-${project.parent.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>${project.basedir}/src/main/assembly/all.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+
+                    <!-- Event validator -->
+                    <execution>
+                        <id>copy-event-validator</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../event-validator/target</directory>
+                                    <includes>
+                                        <include>event-validator-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.event-validator.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../event-validator/scripts</directory>
+                                    <targetPath>${deployment.event-validator.dir}/scripts</targetPath>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../event-validator/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.event-validator.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Token manager -->
+                    <execution>
+                        <id>copy-token-manager</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../token-manager/target</directory>
+                                    <includes>
+                                        <include>token-manager-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.token-manager.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../token-manager/scripts</directory>
+                                    <targetPath>${deployment.token-manager.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../token-manager/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.token-manager.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- External pumps -->
+                    <execution>
+                        <id>copy-external-drivers</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../external-pumps/target</directory>
+                                    <includes>
+                                        <include>external-pumps-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.external-pumps.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../external-pumps/scripts</directory>
+                                    <targetPath>${deployment.external-pumps.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../external-pumps/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.external-pumps.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Application manager -->
+                    <execution>
+                        <id>copy-application-manager</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../application-manager/target</directory>
+                                    <includes>
+                                        <include>application-manager-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.application-manager.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../application-manager/scripts</directory>
+                                    <targetPath>${deployment.application-manager.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Internal pumps -->
+                    <execution>
+                        <id>copy-internal-pumps</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../internal-pumps/target</directory>
+                                    <includes>
+                                        <include>internal-pumps-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.internal-pumps.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../internal-pumps/scripts</directory>
+                                    <targetPath>${deployment.internal-pumps.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../internal-pumps/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.internal-pumps.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Raw to Prepared ETL -->
+                    <execution>
+                        <id>copy-raw-prepared-etl</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../raw-prepared-etl/target</directory>
+                                    <includes>
+                                        <include>raw-prepared-etl-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.raw-prepared-etl.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../raw-prepared-etl/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.raw-prepared-etl.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../raw-prepared-etl/scripts</directory>
+                                    <targetPath>${deployment.raw-prepared-etl.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Overtaking detection -->
+                    <execution>
+                        <id>copy-overtaking-detection</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../analytics/java/overtaking-detection/target</directory>
+                                    <includes>
+                                        <include>overtaking-detection-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.overtaking-detection.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../analytics/java/overtaking-detection/scripts</directory>
+                                    <targetPath>${deployment.overtaking-detection.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../analytics/java/overtaking-detection/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.overtaking-detection.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Overtaking violation detection -->
+                    <execution>
+                        <id>copy-overtaking-violation-detection</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../analytics/java/overtaking-violation-detection/target</directory>
+                                    <includes>
+                                        <include>overtaking-violation-detection-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.overtaking-violation-detection.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../analytics/java/overtaking-violation-detection/scripts</directory>
+                                    <targetPath>${deployment.overtaking-violation-detection.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../analytics/java/overtaking-violation-detection/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.overtaking-violation-detection.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Overtaking violation stream datalake -->
+                    <execution>
+                        <id>copy-overtaking-violation-stream-datalake</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../overtaking-violation-stream-datalake/target</directory>
+                                    <includes>
+                                        <include>overtaking-violation-stream-datalake-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.overtaking-violation-stream-datalake.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../overtaking-violation-stream-datalake/scripts</directory>
+                                    <targetPath>${deployment.overtaking-violation-stream-datalake.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../overtaking-violation-stream-datalake/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.overtaking-violation-stream-datalake.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Road condition violation detection -->
+                    <execution>
+                        <id>copy-road-condition-violation-detection</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../analytics/java/road-condition-violation-detection/target</directory>
+                                    <includes>
+                                        <include>road-condition-violation-detection-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.road-condition-violation-detection.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../analytics/java/road-condition-violation-detection/scripts</directory>
+                                    <targetPath>${deployment.road-condition-violation-detection.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../analytics/java/road-condition-violation-detection/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.road-condition-violation-detection.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Road condition violation stream datalake -->
+                    <execution>
+                        <id>copy-road-condition-violation-stream-datalake</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../road-condition-violation-stream-datalake/target</directory>
+                                    <includes>
+                                        <include>road-condition-violation-stream-datalake-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.road-condition-violation-stream-datalake.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../road-condition-violation-stream-datalake/scripts</directory>
+                                    <targetPath>${deployment.road-condition-violation-stream-datalake.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../road-condition-violation-stream-datalake/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.road-condition-violation-stream-datalake.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Sql dal -->
+                    <execution>
+                        <id>copy-sql-dal</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../sql-dal/target</directory>
+                                    <includes>
+                                        <include>sql-dal-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.sql-dal.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Mdm -->
+                    <execution>
+                        <id>copy-mdm</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../mdm/target</directory>
+                                    <includes>
+                                        <include>mdm-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.mdm.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../mdm/scripts</directory>
+                                    <targetPath>${deployment.mdm.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Mock -->
+                    <execution>
+                        <id>copy-mock</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../mock/target</directory>
+                                    <includes>
+                                        <include>mock-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.mock.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../mock/scripts</directory>
+                                    <targetPath>${deployment.mock.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../mock/local-data</directory>
+                                    <targetPath>${deployment.mock.dir}/local-data</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../mock/e2e-data</directory>
+                                    <targetPath>${deployment.mock.dir}/e2e-data</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Redis manager -->
+                    <execution>
+                        <id>copy-redis-manager</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../redis-manager/target</directory>
+                                    <includes>
+                                        <include>redis-manager-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.redis-manager.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../redis-manager/scripts</directory>
+                                    <targetPath>${deployment.redis-manager.dir}/scripts</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../redis-manager/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.redis-manager.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Secure storage dal -->
+                    <execution>
+                        <id>copy-secure-storage-dal</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../secure-storage-dal/target</directory>
+                                    <includes>
+                                        <include>secure-storage-dal-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.secure-storage-dal.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../secure-storage-dal/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.secure-storage-dal.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Redis dal -->
+                    <execution>
+                        <id>copy-redis-dal</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../redis-dal/target</directory>
+                                    <includes>
+                                        <include>redis-dal-${project.parent.version}-shaded.jar</include>
+                                    </includes>
+                                    <targetPath>${deployment.redis-dal.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>../redis-dal/target/classes</directory>
+                                    <includes>
+                                        <include>log4j.properties</include>
+                                    </includes>
+                                    <targetPath>${deployment.redis-dal.dir}</targetPath>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Removing postfix shaded from jars created by shade plugin (to not affect scripts) -->
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>rename-file</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                        <configuration>
+                            <fileSets>
+                                <!-- Event validator -->
+                                <fileSet>
+                                    <sourceFile>${deployment.event-validator.dir}/event-validator-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.event-validator.dir}/event-validator-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Token manager -->
+                                <fileSet>
+                                    <sourceFile>${deployment.token-manager.dir}/token-manager-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.token-manager.dir}/token-manager-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- External pumps -->
+                                <fileSet>
+                                    <sourceFile>${deployment.external-pumps.dir}/external-pumps-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.external-pumps.dir}/external-pumps-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Application manager -->
+                                <fileSet>
+                                    <sourceFile>${deployment.application-manager.dir}/application-manager-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.application-manager.dir}/application-manager-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Internal pumps -->
+                                <fileSet>
+                                    <sourceFile>${deployment.internal-pumps.dir}/internal-pumps-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.internal-pumps.dir}/internal-pumps-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Raw to Prepared ETL -->
+                                <fileSet>
+                                    <sourceFile>${deployment.raw-prepared-etl.dir}/raw-prepared-etl-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.raw-prepared-etl.dir}/raw-prepared-etl-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Overtaking detection -->
+                                <fileSet>
+                                    <sourceFile>${deployment.overtaking-detection.dir}/overtaking-detection-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.overtaking-detection.dir}/overtaking-detection-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Overtaking violation detection -->
+                                <fileSet>
+                                    <sourceFile>${deployment.overtaking-violation-detection.dir}/overtaking-violation-detection-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.overtaking-violation-detection.dir}/overtaking-violation-detection-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Overtaking violation stream datalake -->
+                                <fileSet>
+                                    <sourceFile>${deployment.overtaking-violation-stream-datalake.dir}/overtaking-violation-stream-datalake-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.overtaking-violation-stream-datalake.dir}/overtaking-violation-stream-datalake-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Road condition violation detection -->
+                                <fileSet>
+                                    <sourceFile>${deployment.road-condition-violation-detection.dir}/road-condition-violation-detection-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.road-condition-violation-detection.dir}/road-condition-violation-detection-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Road condition violation stream datalake -->
+                                <fileSet>
+                                    <sourceFile>${deployment.road-condition-violation-stream-datalake.dir}/road-condition-violation-stream-datalake-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.road-condition-violation-stream-datalake.dir}/road-condition-violation-stream-datalake-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Sql dal -->
+                                <fileSet>
+                                    <sourceFile>${deployment.sql-dal.dir}/sql-dal-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.sql-dal.dir}/sql-dal-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Mdm -->
+                                <fileSet>
+                                    <sourceFile>${deployment.mdm.dir}/mdm-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.mdm.dir}/mdm-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Mock -->
+                                <fileSet>
+                                    <sourceFile>${deployment.mock.dir}/mock-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.mock.dir}/mock-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Redis manager -->
+                                <fileSet>
+                                    <sourceFile>${deployment.redis-manager.dir}/redis-manager-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.redis-manager.dir}/redis-manager-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Secure storage dal -->
+                                <fileSet>
+                                    <sourceFile>${deployment.secure-storage-dal.dir}/secure-storage-dal-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.secure-storage-dal.dir}/secure-storage-dal-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+
+                                <!-- Redis dal -->
+                                <fileSet>
+                                    <sourceFile>${deployment.redis-dal.dir}/redis-dal-${project.parent.version}-shaded.jar</sourceFile>
+                                    <destinationFile>${deployment.redis-dal.dir}/redis-dal-${project.parent.version}.jar</destinationFile>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

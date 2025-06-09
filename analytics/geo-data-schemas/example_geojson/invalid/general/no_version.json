@@ -1,0 +1,22 @@
+{
+  "type": "Feature",
+  "properties": {
+    "Description": "No overtaking",
+    "Road": "Unity Road",
+    "uuid": "2970c8c7-fe7e-4c64-8c57-b88c545c4952",
+    "domain": "com.epam.tcodata.entity.geo.no.overtaking"
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        53.447102,
+        46.311322
+      ],
+      [
+        53.446992,
+        46.310701
+      ]
+    ]
+  }
+}

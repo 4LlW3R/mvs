@@ -1,0 +1,28 @@
+{
+  "sqlPumpMixOffset" : "",
+  "sqlMdmKeyMapping" : "local-data/goldenset/mdm/KeyMapping.json",
+  "sqlPumpEventHubOffset" : "",
+  "sqlPumpSignal" : "",
+  "sqlSpeedLayerSpeedLayerPosition" : "",
+  "sqlSpeedLayerSpeedLayerEvent" : "",
+
+  "hiveRawPosition" : "",
+  "hiveRawEvent" : "",
+  "hiveRawTrip" : "",
+  "hiveRawSubtrip" : "",
+  "hiveRawDriver" : "",
+  "hiveRawAsset" : "",
+  "hiveRawLibraryEvent" : "",
+  "hiveRawLocation" : "",
+  "hiveRawOrganisationGroup" : "",
+  "hiveRawOrganisationSubGroup" : "",
+
+  "hivePreparedPosition" : "local-data/goldenset/prepared/PreparedPosition.json",
+  "hivePreparedEvent" : "",
+  "hivePreparedTrip" :  "",
+  "hivePreparedSubtrip" : "",
+  "hivePreparedDriver" :  "",
+  "hivePrepareVehicle" : "",
+  "hivePreparedLocation" :  "",
+  "hivePreparedGroup" : ""
+}

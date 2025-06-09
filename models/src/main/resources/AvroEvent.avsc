@@ -1,0 +1,112 @@
+{
+	"type": "record",
+	"name": "AvroEvent",
+	"namespace": "com.epam.tcodata.models.avro.fact",
+	"fields": [
+	    {
+			"name": "durableId",
+			"type": ["null", "string"]
+		},
+		{
+			"name": "ingestedDateUtc",
+			"type": {"type": "long", "logicalType": "timestamp-millis"}
+		},
+		{
+			"name": "subscriptionId",
+			"type": ["null", "long"]
+		},
+		{
+			"name": "lineageCode",
+			"type": ["null", "int"]
+		},
+		{
+			"name": "driverDurableKey",
+			"type": ["null", "string"]
+		},
+		{
+			"name": "vehicleDurableKey",
+			"type": ["null", "string"]
+		},
+		{
+			"name": "schemaVersion",
+			"doc": "Transport message support: avro schema version number",
+			"type": ["null", "int"]
+		},
+		{
+			"name": "assetId",
+			"type": ["null", "long"]
+		},
+		{
+			"name": "driverId",
+			"type": ["null", "long"]
+		},
+		{
+			"name": "eventId",
+			"type": ["null", "long"]
+		},
+		{
+			"name": "eventTypeId",
+			"type": ["null", "long"]
+		},
+		{
+			"name": "eventCategory",
+			"type": ["null", "string"]
+		},
+		{
+			"name": "startDateTime",
+			"type": {"type": "long", "logicalType": "timestamp-millis"}
+		},
+		{
+			"name": "startOdometerKilometres",
+			"type": ["null", "double"]
+		},
+		{
+		    "name": "startPosition",
+		    "type": ["null", "AvroPosition"]
+		},
+		{
+			"name": "endDateTime",
+			"type": {"type": "long", "logicalType": "timestamp-millis"}
+		},
+		{
+			"name": "endOdometerKilometres",
+			"type": ["null", "double"]
+		},
+		{
+		    "name": "endPosition",
+		    "type": ["null", "AvroPosition"]
+		},
+		{
+			"name": "value",
+			"type": ["null", "double"]
+		},
+		{
+			"name": "valueType",
+			"type": ["null", "string"]
+		},
+		{
+			"name": "valueUnits",
+			"type": ["null", "string"]
+		},
+		{
+			"name": "totalTimeSeconds",
+			"type": ["null", "int"]
+		},
+		{
+			"name": "totalOccurrences",
+			"type": ["null", "long"]
+		},
+		{
+		    "name": "mediaUrls",
+		    "type": ["null", "AvroMediaUrls"]
+		},
+		{
+			"name": "locationId",
+			"type": ["null", "long"]
+		},
+		{
+			"name": "speedLimit",
+			"type": ["null", "double"]
+		}
+	]
+}

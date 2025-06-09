@@ -1,0 +1,15 @@
+problem_vehicle,start_date_time,organization_durable_key,validation_code,vehicle_durable_key,start_position_speed_kilometres_per_hour,description
+7,2019-03-12 00:00:01,1,-1,1,,harshbraking
+5,2019-03-12 00:00:02,1,0,1,,harshbraking
+5,2019-03-12 00:00:03,1,0,1,,harshbraking
+5,2019-03-12 00:00:04,1,0,1,,harshbraking
+10,2019-03-12 00:00:05,1,-1,1,,harshbraking
+6,2019-03-12 00:00:00,1,-1,2,,harshbraking
+5,2019-03-12 00:00:01,1,0,2,,harshbraking
+5,2019-03-12 00:00:02,1,0,2,,harshbraking
+5,2019-03-12 00:00:03,1,0,2,,harshbraking
+9,2019-03-12 00:00:04,1,-1,2,,
+10,2019-03-12 00:00:04,1,-1,2,,harshbraking
+8,2019-03-12 00:00:04,1,-1,2,,
+2,2019-03-12 00:00:04,1,0,2,,
+5,2019-03-12 00:00:05,1,0,2,,harshbraking

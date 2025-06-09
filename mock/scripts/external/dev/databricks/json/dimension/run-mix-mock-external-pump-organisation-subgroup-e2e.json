@@ -1,0 +1,23 @@
+[
+  "--class",
+  "com.epam.tcodata.mock.main.e2e.MixMockExternalPumpBatchDriver",
+  "--name",
+  "MixMockExternalPump_OrganisationSubGroup",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco/tmp/logs/MixMockExternalPump_OrganisationSubGroup -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332devtco/distr/1.8.0-RC/external-pumps/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco/tmp/logs/MixMockExternalPump_OrganisationSubGroup -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332devtco/distr/1.8.0-RC/external-pumps/log4j.properties",
+  "wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/mock/mock-1.8.0-RC.jar",
+  "--appName",
+  "MixMockExternalPump_OrganisationSubGroup",
+  "--factoryClassName",
+  "com.epam.tcodata.mock.external.pump.factory.impl.mix.MixMockExternalOrganisationSubGroupFactory",
+  "--restDirectory",
+  "/dbfs/mnt/development/rest/",
+  "--currentMoment",
+  "2019-11-19T00:00:00.000Z",
+  "--dumpRddDirectory",
+  "dbfs:/mnt/mvsdatalaket332devtco/sshadmin/external-pumps/dump",
+  "--additionalLogging",
+  "false"
+]

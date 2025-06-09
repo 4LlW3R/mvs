@@ -1,0 +1,118 @@
+{
+  "type": "record",
+  "name": "OvertakingEventAvro",
+  "namespace": "com.epam.tcodata.storage.avro.entities.events.overtaking",
+  "fields": [
+    {
+      "name": "domain",
+      "doc": "Indicates the domain of the event, e.g. 'analytics','external', 'guardian', and the producer, e.g. 'overtaking', 'congestion'",
+      "type": "string"
+    },
+    {
+      "name": "entityType",
+      "type": "int"
+    },
+    {
+      "name": "schemaVersion",
+      "type": "int"
+    },
+    {
+      "name": "id",
+      "doc": "Id is constructed as such: $subscriptionIDA_$vehicleIDA-$subscriptionIDB_$vehicleIDB_$time-in-milliseconds",
+      "type": "string"
+    },
+    {
+      "name": "aOvertookB",
+      "doc": "Field indicating which vehicle performed the overtaking maneuver",
+      "type": {
+        "type": "enum",
+        "name": "PassingVehicleIdx",
+        "symbols": ["NOT_INITIALIZED", "A_OVERTOOK_B", "B_OVERTOOK_A", "NOT_DETECTED"]
+      }
+    },
+    {
+      "name": "vehicleDurableIdA",
+      "type": "string"
+    },
+    {
+      "name": "vehicleDurableIdB",
+      "type": "string"
+    },
+    {
+      "name": "driverDurableIdA",
+      "type": "string"
+    },
+    {
+      "name": "driverDurableIdB",
+      "type": "string"
+    },
+    {
+      "name": "velocityA",
+      "doc": "Velocity measured in km-per-hour",
+      "type": "double"
+    },
+    {
+      "name": "velocityB",
+      "doc": "Velocity measured in km-per-hour",
+      "type": "double"
+    },
+    {
+      "name": "trajectoryA",
+      "type": {
+        "type": "record",
+        "name": "OvertakingPathSegmentAvro",
+        "fields": [
+          {
+            "name": "startLatitude",
+            "type": "double"
+          },
+          {
+            "name": "startLongitude",
+            "type": "double"
+          },
+          {
+            "name": "startTime",
+            "type": {
+              "type": "long",
+              "logicalType": "timestamp-millis"
+            }
+          },
+          {
+            "name": "endLatitude",
+            "type": "double"
+          },
+          {
+            "name": "endLongitude",
+            "type": "double"
+          },
+          {
+            "name": "endTime",
+            "type": {
+              "type": "long",
+              "logicalType": "timestamp-millis"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "trajectoryB",
+      "type": "com.epam.tcodata.storage.avro.entities.events.overtaking.OvertakingPathSegmentAvro"
+    },
+    {
+      "name": "time",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "latitude",
+      "type": "double"
+    },
+    {
+      "name": "longitude",
+      "type": "double"
+    }
+  ]
+}

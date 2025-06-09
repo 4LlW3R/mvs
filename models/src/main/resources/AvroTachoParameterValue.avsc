@@ -1,0 +1,15 @@
+{
+    "type": "record",
+    "name": "AvroTachoParameterValue",
+    "namespace": "com.epam.tcodata.models.avro.fact",
+    "fields": [
+	    {
+            "name": "value",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "key",
+            "type": ["null", "int"]
+        }
+    ]
+}

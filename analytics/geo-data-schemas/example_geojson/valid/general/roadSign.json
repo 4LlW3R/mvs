@@ -1,0 +1,36 @@
+{
+    "type": "FeatureCollection",
+    "name": "roadSign",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:EPSG::32639"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "road": "Ustanovka",
+                "sign": "3.24",
+                "signDescription": "Maximum Speed Limit 50 km per hour",
+                "xEast": 685186.0,
+                "yNorth": 5108212.0,
+                "sideLeft": null,
+                "sideRight": "R",
+                "condition": "G",
+                "notes": null,
+                "uuid": "2970c8c7-fe7e-4c64-8c57-h99c545c4946",
+				"version": 1,
+				"domain": "com.epam.tcodata.entity.geo.road.sign"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    685186.0,
+                    5108212.0
+                ]
+            }
+        }
+    ]
+}

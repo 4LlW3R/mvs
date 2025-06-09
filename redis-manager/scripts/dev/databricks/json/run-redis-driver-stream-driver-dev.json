@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.redis.manager.RedisDriverStreamDriver",
+  "--name",
+  "RedisManager_Driver",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/RedisManager_Driver -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/redis-manager/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/RedisManager_Driver -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/redis-manager/log4j.properties",
+  "wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/redis-manager/redis-manager-1.8.0-RC.jar",
+  "--appName",
+  "RedisManager_Driver",
+  "--batchIntervalSeconds",
+  "600"
+]

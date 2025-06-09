@@ -1,0 +1,48 @@
+{
+  "type": "record",
+  "name": "AvroTacho",
+  "namespace": "com.epam.tcodata.models.avro.fact",
+  "fields": [
+	    {
+            "name": "durableId",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "ingestedDateUtc",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "subscriptionId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "lineageCode",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "schemaVersion",
+            "doc": "Transport message support: avro schema version number",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "assetId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "parameterDefinitions",
+            "type": ["null", {"type": "array", "items": "AvroTachoParameterDefinition"}]
+        },
+        {
+            "name": "intervals",
+            "type": ["null", {"type": "array", "items": "AvroTachoInterval"}]
+        },
+        {
+            "name": "startDateTime",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+        {
+            "name": "endDateTime",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        }
+    ]
+}

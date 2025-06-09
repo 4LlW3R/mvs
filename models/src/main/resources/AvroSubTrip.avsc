@@ -1,0 +1,128 @@
+{
+  "type": "record",
+  "name": "AvroSubTrip",
+  "namespace": "com.epam.tcodata.models.avro.fact",
+  "fields": [
+	    {
+            "name": "durableId",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "ingestedDateUtc",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "subscriptionId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "lineageCode",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "schemaVersion",
+            "doc": "Transport message support: avro schema version number",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "parentTripKey",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "subTripId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "subTripStart",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "startPositionId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "startPosition",
+            "type": ["null", "AvroPosition"]
+        },
+	    {
+            "name": "depart",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "halt",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "subTripEnd",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "endPositionId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "endPosition",
+            "type": ["null", "AvroPosition"]
+        },
+	    {
+            "name": "drivingTime",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "standingTime",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "duration",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "distanceKilometres",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "startOdometerKilometres",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "endOdometerKilometres",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "startEngineSeconds",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "endEngineSeconds",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "engineSeconds",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "pulseValue",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "fuelUsedLitres",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "maxSpeedKilometersPerHour",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "maxAccelerationKilometersPerHourPerSecond",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "maxDecelerationKilometersPerHourPerSecond",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "maxRpm",
+            "type": ["null", "double"]
+        }
+    ]
+}

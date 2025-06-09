@@ -1,0 +1,17 @@
+[
+  "--class",
+  "com.epam.tcodata.token.manager.driver.TokenManagerStreamDriver",
+  "--name",
+  "TokenManager",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/TokenManager -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/token-manager/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/TokenManager -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/token-manager/log4j.properties",
+  "wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/token-manager/token-manager-1.8.0-RC.jar",
+  "--factoryClassName",
+  "com.epam.tcodata.token.manager.factory.impl.TokenManagerFactory",
+  "--appName",
+  "TokenManager",
+  "--batchIntervalSeconds",
+  "2700"
+]

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="pumps_changelog.xml">
+
+
+    <!-- Init the pumps database  -->
+    <changeSet id="1" author="Valerii Florov">
+
+        <!--CREATE TABLE [cfg].[Account] (-->
+        <!--[ID] BIGINT IDENTITY (1, 1) NOT NULL,-->
+        <!--[AccountName] [varchar](255) NOT NULL,-->
+        <!--[AccountKeyVaultName] [varchar](255) NOT NULL,-->
+        <!--[IsActive] [bit] NOT NULL DEFAULT ((0)),-->
+        <!--CONSTRAINT [PK_cfg.Account] PRIMARY KEY CLUSTERED ([ID] ASC)-->
+        <!--);-->
+        <createTable schemaName="cfg" tableName="Account" remarks="Contains accounts to access to MIX API.">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="AccountName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AccountKeyVaultName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IsActive" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+
+        <!--CREATE TABLE [cfg].[AccountTokens] (-->
+        <!--[ID] BIGINT IDENTITY (1, 1) NOT NULL,-->
+        <!--[AccountId] BIGINT NOT NULL,-->
+        <!--[AccessToken] [varchar](1500) NULL,-->
+        <!--[RefreshToken] [varchar](1500) NULL,-->
+        <!--[LastSyncDateUtc]               DATETIME2 (7) NULL,-->
+        <!--[ExpirationDateUtc]               DATETIME2 (7) NULL,-->
+        <!--CONSTRAINT [PK_cfg.AccountTokens] PRIMARY KEY CLUSTERED ([ID] ASC),-->
+        <!--CONSTRAINT [FK_cfg.AccountTokens_cfg.Account_AccountId] FOREIGN KEY ([AccountId]) REFERENCES [cfg].[Account] ([ID]) ON DELETE CASCADE-->
+        <!--);-->
+        <createTable schemaName="cfg" tableName="AccountTokens" remarks="Contains accounts tokens to access to MIX API.">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="AccountId" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AccessToken" type="varchar(1500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="RefreshToken" type="varchar(1500)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="LastSyncDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ExpirationDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="AccountTokens_Account_AccountId"
+                                 baseTableSchemaName="cfg"
+                                 baseTableName="AccountTokens"
+                                 baseColumnNames="AccountId"
+                                 referencedTableSchemaName="cfg"
+                                 referencedTableName="Account"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE" />
+
+
+        <!--CREATE TABLE [cfg].[OrganisationGroup] (-->
+        <!--[ID] BIGINT IDENTITY (1, 1) NOT NULL,-->
+        <!--[AccountId] BIGINT NOT NULL,-->
+        <!--[GroupId] BIGINT NOT NULL,-->
+        <!--[Type] [varchar](255) NULL,-->
+        <!--[DisplayTimeZone] [varchar](255) NULL,-->
+        <!--[Name] [varchar](255) NULL,-->
+        <!--[IsActive] [bit] NOT NULL DEFAULT ((0)),-->
+        <!--CONSTRAINT [PK_cfg.OrganisationGroup] PRIMARY KEY CLUSTERED ([ID] ASC),-->
+        <!--CONSTRAINT [FK_cfg.OrganisationGroup_cfg.Account_AccountId] FOREIGN KEY ([AccountId]) REFERENCES [cfg].[Account] ([ID]) ON DELETE CASCADE-->
+        <!--);-->
+        <createTable schemaName="cfg" tableName="OrganisationGroup" remarks="Contains description of organisation groups.">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="AccountId" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="GroupId" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Type" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DisplayTimeZone" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Name" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="IsActive" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="OrganisationGroup_Account_AccountId"
+                                 baseTableSchemaName="cfg"
+                                 baseTableName="OrganisationGroup"
+                                 baseColumnNames="AccountId"
+                                 referencedTableSchemaName="cfg"
+                                 referencedTableName="Account"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE" />
+
+
+<!--        Source script: -->
+<!--        CREATE TABLE [cfg].[MixOffset] (-->
+<!--        [ID] BIGINT IDENTITY (1, 1) NOT NULL,-->
+<!--        [OrganisationGroupId] BIGINT NOT NULL,-->
+<!--        [EntityType] INT NOT NULL,-->
+<!--        [EntitySuperType] INT NOT NULL,-->
+<!--        [LastSyncDateUtc] DATETIME2(5) NULL,-->
+<!--        [LastProcessedTime] DATETIME2(5) NOT NULL,-->
+<!--        [LastSyncResultCode] INT NOT NULL,-->
+<!--        [LastSyncElementCount] BIGINT NOT NULL,-->
+<!--        [LastSyncDuration] TIME(5) NOT NULL,-->
+<!--        [TotalElementsCount] BIGINT NOT NULL,-->
+<!--        [LastErrorMessage] VARCHAR(8000) NULL-->
+<!--        CONSTRAINT [PK_cfg.MixOffset] PRIMARY KEY CLUSTERED ([ID] ASC),-->
+<!--        CONSTRAINT [FK_cfg.MixOffset_cfg.OrganisationGroup_OrganisationGroupId] FOREIGN KEY ([OrganisationGroupId]) REFERENCES [cfg].[OrganisationGroup] ([ID]) ON DELETE CASCADE-->
+<!--        );-->
+
+<!--        GO-->
+<!--        CREATE UNIQUE NONCLUSTERED INDEX [UX_MixOffset_OrganisationGroupIdAndCodes]-->
+<!--        ON [cfg].[MixOffset]([OrganisationGroupId] ASC, [EntityType] ASC);        -->
+        <createTable schemaName="cfg" tableName="MixOffset" remarks="Contains offsets for external pumps.">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="OrganisationGroupId" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntityType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntitySuperType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastSyncDateUtc" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="LastProcessedTime" type="datetime2(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastSyncResultCode" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastSyncElementCount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastSyncDuration" type="time(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TotalElementsCount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastErrorMessage" type="varchar(8000)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="MixOffset_OrganisationGroup_OrganisationGroupId"
+                                 baseTableSchemaName="cfg"
+                                 baseTableName="MixOffset"
+                                 baseColumnNames="OrganisationGroupId"
+                                 referencedTableSchemaName="cfg"
+                                 referencedTableName="OrganisationGroup"
+                                 referencedColumnNames="ID"
+                                 onDelete="CASCADE"/>
+
+        <createIndex indexName="UX_MixOffset_OrganisationGroupIdAndCodes"
+                     schemaName="cfg"
+                     tableName="MixOffset"
+                     unique="true">
+
+            <column name="OrganisationGroupId" type="bigint"/>
+            <column name="EntityType" type="int"/>
+        </createIndex>
+
+        <!--CREATE TABLE [cfg].[EventHubOffset] (-->
+        <!--[ID] BIGINT IDENTITY (1, 1) NOT NULL,-->
+        <!--[PartitionId] INT NOT NULL,-->
+        <!--[EntityType] INT NOT NULL,-->
+        <!--[EntitySuperType] INT NOT NULL,-->
+        <!--[SeqNo] BIGINT NOT NULL,-->
+        <!--[LastSyncDateUtc] DATETIME2(5) NULL,-->
+        <!--[LastSyncElementCount] BIGINT NOT NULL,-->
+        <!--[TotalElementsCount] BIGINT NOT NULL,-->
+        <!--CONSTRAINT [PK_cfg.EventHubOffset] PRIMARY KEY CLUSTERED ([ID] ASC)-->
+        <!--);-->
+        <createTable schemaName="cfg" tableName="EventHubOffset" remarks="Contains offsets for event hub.">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="PartitionId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntityType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntitySuperType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SeqNo" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LastSyncDateUtc" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="LastSyncElementCount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TotalElementsCount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--CREATE TABLE [cfg].[Signal] (-->
+        <!--[ID] BIGINT IDENTITY (1, 1) NOT NULL,-->
+        <!--[ApplicationType] INT NOT NULL,-->
+        <!--[ApplicationSuperType] INT NOT NULL,-->
+        <!--[EntityType] INT NULL,-->
+        <!--[EntitySuperType] INT NULL,-->
+        <!--[Timestamp] DATETIME2(5) NULL,-->
+        <!--[SignalType] INT NOT NULL,-->
+        <!--[Message] VARCHAR(100) NULL,-->
+        <!--CONSTRAINT [PK_cfg.Signal] PRIMARY KEY CLUSTERED ([ID] ASC)-->
+        <!--);-->
+        <createTable schemaName="cfg" tableName="Signal" remarks="Contains signals that used to control spark application.">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ApplicationType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ApplicationSuperType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntityType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EntitySuperType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Timestamp" type="datetime2(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SignalType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Message" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Valerii Florov">
+
+        <createTable schemaName="cfg" tableName="HiveOffset" remarks="Contains offsets for hive (orc files).">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="EntityType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TimeFrom" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TimeTo" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="IngestedDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="PreparedDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ElementCount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="3" author="Valerii Florov">
+        <dropColumn schemaName="cfg"
+                    tableName="HiveOffset"
+                    columnName="TimeFrom"/>
+
+        <dropColumn schemaName="cfg"
+                    tableName="HiveOffset"
+                    columnName="TimeTo"/>
+
+        <renameColumn schemaName="cfg"
+                      tableName="HiveOffset"
+                      columnDataType="datetime2(7)"
+                      oldColumnName="IngestedDateUtc"
+                      newColumnName="PersistedDateUtc"/>
+
+        <addColumn schemaName="cfg"
+                   tableName="HiveOffset">
+            <column name="WeekNumber" type="int"/>
+        </addColumn>
+
+        <addColumn schemaName="cfg"
+                   tableName="HiveOffset">
+            <column name="Year" type="int"/>
+        </addColumn>
+
+        <createIndex indexName="UX_HiveOffset_EntityType_PreparedDateUtc"
+                     schemaName="cfg"
+                     tableName="HiveOffset"
+                     unique="false">
+
+            <column name="EntityType" type="int"/>
+            <column name="PreparedDateUtc" type="datetime2(7)"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="4" author="Valerii Florov">
+        <dropColumn schemaName="cfg"
+                    tableName="HiveOffset"
+                    columnName="WeekNumber"/>
+
+        <dropColumn schemaName="cfg"
+                    tableName="HiveOffset"
+                    columnName="Year"/>
+    </changeSet>
+
+    <changeSet id="5" author="Dmitriy Kozhin">
+        <addColumn schemaName="cfg"
+                   tableName="HiveOffset">
+            <column name="ValidatedDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="6" author="Dmitriy Kozhin">
+        <createTable schemaName="cfg" tableName="ValidatedEventTachoOffset" remarks="Contains offsets for tacho facts.">
+            <column name="ID" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="SyncDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="FromPersistedDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ToPersistedDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ElementCount" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SyncDuration" type="time(5)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6-tag" author="Dmitriy Kozhin">
+        <tagDatabase tag="version_0.1.0"/>
+    </changeSet>
+
+</databaseChangeLog>

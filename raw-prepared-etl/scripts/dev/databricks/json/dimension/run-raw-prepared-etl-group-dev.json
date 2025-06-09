@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.raw.prepared.etl.Driver",
+  "--name",
+  "RawPreparedEtl_OrganisationGroup",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/RawPreparedEtl_OrganisationGroup -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/raw-prepared-etl/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/RawPreparedEtl_OrganisationGroup -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/raw-prepared-etl/log4j.properties",
+  "wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/raw-prepared-etl/raw-prepared-etl-1.8.0-RC.jar",
+  "--appName",
+  "RawPreparedEtl_OrganisationGroup",
+  "--factoryClassName",
+  "com.epam.tcodata.raw.prepared.etl.factory.impl.OrganisationGroupSDMFactory"
+]

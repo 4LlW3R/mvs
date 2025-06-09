@@ -1,0 +1,2 @@
+INSERT INTO raw.dim_library_event (durable_id, ingested_date_utc, subscription_id, lineage_code, persisted_date_utc, description, event_type_id, event_type, display_units, format_type, value_name)
+VALUES ('41b3671e52034ecabb4267bad236c1f6', '2019-07-31', 0, 4, '2019-07-31', 'confirmed-overtaking-violation', 800, '', '', '', '')

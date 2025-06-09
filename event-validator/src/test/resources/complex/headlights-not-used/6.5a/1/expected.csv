@@ -1,0 +1,3 @@
+problem_vehicle,start_date_time,organization_durable_key,validation_code,vehicle_durable_key,start_position_speed_kilometres_per_hour,description
+4,2019-03-12 00:00:00,1,1,1,,vehicledrivenwithoutheadlights
+12,2019-03-12 00:00:00,1,-1,1,60,vehicledrivenwithoutheadlights

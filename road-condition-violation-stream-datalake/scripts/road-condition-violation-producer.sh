@@ -1,0 +1,1 @@
+java -cp ../road-condition-violation-stream-datalake-1.8.0-RC.jar:/usr/hdp/current/spark2-client/jars/spark-streaming_2.11-2.3.0.2.6.5.3003-25.jar:/usr/hdp/current/spark2-client/jars/scala-library-2.11.8.jar:/usr/hdp/current/spark2-client/jars/avro-1.8.2.jar com.epam.tcodata.road.condition.violation.stream.datalake.RoadConditionViolationEventHubProducer

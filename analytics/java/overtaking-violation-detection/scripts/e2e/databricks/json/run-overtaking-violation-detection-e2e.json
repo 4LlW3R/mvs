@@ -1,0 +1,17 @@
+[
+  "--class",
+  "com.epam.tcodata.analytics.overtaking.violation.detection.OvertakingViolationDetectionDriver",
+  "--name",
+  "Analytics_OvertakingViolationDetection",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332testtco/tmp/logs/Analytics_OvertakingViolationDetection -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332testtco/distr/1.8.0-RC/overtaking-violation-detection/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332testtco/tmp/logs/Analytics_OvertakingViolationDetection -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332testtco/distr/1.8.0-RC/overtaking-violation-detection/log4j.properties",
+  "dbfs:/mnt/mvsdatalaket332testtco/distr/1.8.0-RC/overtaking-violation-detection/overtaking-violation-detection-1.8.0-RC.jar",
+  "--appName",
+  "Analytics_OvertakingViolationDetection",
+  "--factoryClassName",
+  "com.epam.tcodata.analytics.overtaking.violation.detection.factory.impl.OvertakingViolationFactory",
+  "--batchIntervalSeconds",
+  "210"
+]

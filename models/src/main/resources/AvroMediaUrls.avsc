@@ -1,0 +1,23 @@
+{
+    "type": "record",
+    "name": "AvroMediaUrls",
+    "namespace": "com.epam.tcodata.models.avro.fact",
+    "fields": [
+	    {
+            "name": "road",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "cab",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "camera3",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "camera4",
+            "type": ["null", "string"]
+        }
+    ]
+}

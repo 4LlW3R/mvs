@@ -1,0 +1,21 @@
+[
+  "--class",
+  "com.epam.tcodata.external.pump.driver.ExternalPumpBatchDriver",
+  "--name",
+  "ExternalPump_Asset",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332mqatco/tmp/logs/ExternalPump_Asset -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332mqatco/distr/external-pumps/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332mqatco/tmp/logs/ExternalPump_Asset -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332mqatco/distr/external-pumps/log4j.properties",
+  "--conf",
+  "spark.executor.cores=2",
+  "--conf",
+  "spark.executor.memory=1256m",
+  "dbfs:/mnt/mvsdatalaket332mqatco/distr/external-pumps/external-pumps-1.8.0-RC.jar",
+  "--appName",
+  "ExternalPump_Asset",
+  "--factoryClassName",
+  "com.epam.tcodata.external.pump.factory.impl.ExternalAssetFactory",
+  "--additionalLogging",
+  "true"
+]

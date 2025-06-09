@@ -1,0 +1,19 @@
+[
+  "--class",
+  "com.epam.tcodata.external.pump.driver.ExternalPumpStreamDriver",
+  "--name",
+  "ExternalPump_Event",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/ExternalPump_Event -Dlog4j.configuration=file:/dbfs/mnt/development/tco-mvs-deployment-1.8.0-RC/external-pumps/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/ExternalPump_Event -Dlog4j.configuration=file:/dbfs/mnt/development/tco-mvs-deployment-1.8.0-RC/external-pumps/log4j.properties",
+  "wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/external-pumps/external-pumps-1.8.0-RC.jar",
+  "--appName",
+  "ExternalPump_Event",
+  "--batchIntervalSeconds",
+  "300",
+  "--factoryClassName",
+  "com.epam.tcodata.external.pump.factory.impl.ExternalEventFactory",
+  "--additionalLogging",
+  "false"
+]

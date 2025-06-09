@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.redis.manager.RedisFailoverManager",
+  "--name",
+  "RedisFailoverManager",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/RedisFailoverManager -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/redis-manager/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/RedisFailoverManager -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/redis-manager/log4j.properties",
+  "dbfs:/mnt/mvsdatalakep332stagetco/distr/redis-manager/redis-manager-1.8.0-RC.jar",
+  "--appName",
+  "RedisFailoverManager",
+  "--factoryClassName",
+  "com.epam.tcodata.redis.manager.factory.impl.RedisFailoverManagerFactory"
+]

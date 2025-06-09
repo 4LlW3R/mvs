@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "General feature",
+  "type": "object",
+  "description": "This object represents feature, or collection of features with only default properties: uuid, domain, version. Any valid GeoData object should be valid against this schema in addition to more specific.",
+  "additionalProperties": true,
+  "id": "generalFeature.json",
+  "required": [
+    "type"
+  ],
+  "allOf": [
+    {
+      "$ref": "geojson.json"
+    },
+    {
+      "$ref": "definitions.json#/definitions/geojsonProperties"
+    },
+    {
+      "oneOf": [
+        {
+          "$ref": "definitions.json#/definitions/featureCollection"
+        },
+        {
+          "$ref": "definitions.json#/definitions/feature"
+        }
+      ]
+    }
+  ]
+}

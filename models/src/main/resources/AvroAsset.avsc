@@ -1,0 +1,156 @@
+{
+    "type": "record",
+    "name": "AvroAsset",
+    "namespace": "com.epam.tcodata.models.avro.dimension",
+    "fields": [
+	    {
+            "name": "durableId",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "ingestedDateUtc",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "subscriptionId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "lineageCode",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "schemaVersion",
+            "doc": "Transport message support: avro schema version number",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "assetId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "assetTypeId",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "description",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "connectedTrailer",
+            "type": ["null", "boolean"]
+        },
+        {
+            "name": "registrationNumber",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "siteId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "fuelType",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "targetFuelConsumption",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "targetFuelConsumptionUnits",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "targetHourlyFuelConsumption",
+            "type": ["null", "double"]
+        },
+	    {
+            "name": "targetHourlyFuelConsumptionUnits",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "fleetNumber",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "make",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "model",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "year",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "vinNumber",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "engineNumber",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "fmVehicleId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "additionalMobileDevice",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "notes",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "icon",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "iconColour",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "colour",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "assetImage",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "defaultImage",
+            "type": ["null", "boolean"]
+        },
+        {
+            "name": "assetImageUrl",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "userState",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "createdBy",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "createdDate",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+        {
+            "name": "odometer",
+            "type": ["null", "double"]
+        },
+        {
+            "name": "engineHours",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "country",
+            "type": ["null", "string"]
+        }
+    ]
+}

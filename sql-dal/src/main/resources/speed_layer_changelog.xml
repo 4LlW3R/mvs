@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd"
+        logicalFilePath="speed_layer_changelog.xml">
+
+
+    <!-- Init the pumps database  -->
+    <changeSet id="1" author="Valerii Florov">
+        <!--Create schema-->
+        <sql dbms="mssql">
+            CREATE SCHEMA sl;
+        </sql>
+
+        <!--Create partition function-->
+        <sql dbms="mssql">
+            CREATE PARTITION FUNCTION [pf_DayOfTheYear](SMALLINT) AS RANGE LEFT FOR VALUES (
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+            31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+            61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
+            121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150,
+            151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180,
+            181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210,
+            211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240,
+            241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270,
+            271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300,
+            301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330,
+            331, 332, 333, 334, 335, 336, 337, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360,
+            361, 362, 363, 364, 365
+            );
+        </sql>
+
+        <!--Create partition scheme-->
+        <sql dbms="mssql">
+            CREATE PARTITION SCHEME [ps_DayOfTheYear]
+            AS PARTITION [pf_DayOfTheYear]
+            ALL TO ([PRIMARY]);
+        </sql>
+
+        <!--CREATE TABLE [sl].[SpeedLayerPosition] (-->
+        <!--[ObservedDay] SMALLINT NOT NULL,-->
+        <!--[DurableId] VARCHAR(36) NOT NULL,-->
+        <!--[IngestedDateUtc] DATETIME2(7) NULL,-->
+        <!--[SubscriptionId] BIGINT NOT NULL,-->
+        <!--[LineageCode] INT NULL,-->
+        <!--[PersistedDateUtc] DATETIME2(7) NULL,-->
+        <!--[DriverDurableKey] VARCHAR(36) NULL,-->
+        <!--[VehicleDurableKey] VARCHAR(36) NULL,-->
+        <!--[Timestamp] DATETIME2(7) NOT NULL,-->
+        <!--[Longitude] FLOAT NULL,-->
+        <!--[Latitude] FLOAT NULL,-->
+        <!--[DriverId] BIGINT NULL,-->
+        <!--[AssetId] BIGINT NULL,-->
+        <!--[PositionId] BIGINT NULL,-->
+        <!--[Avl] BIT DEFAULT ((0)) NULL,-->
+        <!--[Source] VARCHAR(255) NULL,-->
+        <!--[OdometerKilometres] FLOAT NULL,-->
+        <!--[IgnitionOn] BIT DEFAULT ((0)) NULL,-->
+        <!--[AgeOfReadingSeconds] INT NULL,-->
+        <!--[Pdop] INT NULL,-->
+        <!--[Vdop] INT NULL,-->
+        <!--[Hdop] INT NULL,-->
+        <!--[NumberOfSatellites] INT NULL,-->
+        <!--[Heading] INT NULL,-->
+        <!--[AltitudeMetres] INT NULL,-->
+        <!--[SpeedKilometresPerHour] FLOAT NULL,-->
+        <!--[DistanceSinceReadingKilometres] INT NULL,-->
+        <!--[FormattedAddress] VARCHAR(255) NULL,-->
+        <!--[SpeedLimit] FLOAT NULL-->
+        <!--);-->
+        <createTable schemaName="sl" tableName="SpeedLayerPosition" remarks="Contains positions for speed layer.">
+            <column name="ObservedDay" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DurableId" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IngestedDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SubscriptionId" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LineageCode" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="PersistedDateUtc" type="datetime2(7)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DriverDurableKey" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="VehicleDurableKey" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Timestamp" type="datetime2(7)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="Longitude" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Latitude" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DriverId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="AssetId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="PositionId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Avl" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Source" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="OdometerKilometres" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="IgnitionOn" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="true"/>
+            </column>
+            <column name="AgeOfReadingSeconds" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Pdop" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Vdop" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Hdop" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="NumberOfSatellites" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Heading" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="AltitudeMetres" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SpeedKilometresPerHour" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DistanceSinceReadingKilometres" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="FormattedAddress" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SpeedLimit" type="float">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <!--Create index for sl.SpeedLayerPosition table-->
+        <sql dbms="mssql">
+            CREATE CLUSTERED INDEX [IX_speed_layer_position_day_vehicle_time]
+            ON [sl].[SpeedLayerPosition]([ObservedDay] ASC, [SubscriptionId] ASC, [VehicleDurableKey] ASC, [Timestamp] ASC)
+            ON [ps_DayOfTheYear] ([ObservedDay]);
+        </sql>
+
+        <!--CREATE TABLE [sl].[SpeedLayerEvent] (-->
+        <!--[ObservedDay] SMALLINT NOT NULL,-->
+        <!--[DurableId] VARCHAR(36) NOT NULL,-->
+        <!--[IngestedDateUtc] DATETIME2(5) NULL,-->
+        <!--[SubscriptionId] BIGINT NOT NULL,-->
+        <!--[LineageCode] INT NULL,-->
+        <!--[PersistedDateUtc] DATETIME2(5) NULL,-->
+        <!--[DriverDurableKey] VARCHAR(36) NULL,-->
+        <!--[VehicleDurableKey] VARCHAR(36) NULL,-->
+        <!--[TotalOccurrences] BIGINT NULL,-->
+        <!--[TotalTimeSeconds] INT NULL,-->
+        <!--[EventTypeId] BIGINT NULL,-->
+        <!--[EventId] BIGINT NULL,-->
+        <!--[DriverId] BIGINT NULL,-->
+        <!--[AssetId] BIGINT NULL,-->
+        <!--[Value] FLOAT NULL,-->
+        <!--[EndDateTime] DATETIME2(5) NULL,-->
+        <!--[StartDateTime] DATETIME2(5) NULL,-->
+        <!--[EventCategory] VARCHAR(36) NULL,-->
+        <!--[StartOdometerKilometres] FLOAT NULL,-->
+        <!--[StartPositionTimestamp] DATETIME2(5) NULL,-->
+        <!--[StartPositionLongitude] FLOAT NULL,-->
+        <!--[StartPositionLatitude] FLOAT NULL,-->
+        <!--[StartPositionPositionId] BIGINT NULL,-->
+        <!--[StartPositionSpeedKilometresPerHour] FLOAT NULL,-->
+        <!--[EndOdometerKilometres] FLOAT NULL,-->
+        <!--[EndPositionTimestamp] DATETIME2(5) NULL,-->
+        <!--[EndPositionLongitude] FLOAT NULL,-->
+        <!--[EndPositionLatitude] FLOAT NULL,-->
+        <!--[EndPositionPositionId] BIGINT NULL,-->
+        <!--[EndPositionSpeedKilometresPerHour] FLOAT NULL,-->
+        <!--[ValueType] VARCHAR(36) NULL,-->
+        <!--[ValueUnits] VARCHAR(36) NULL,-->
+        <!--[MediaUrlsRoad] VARCHAR(200) NULL,-->
+        <!--[MediaUrlsCab] VARCHAR(200) NULL,-->
+        <!--[MediaUrlsCamera3] VARCHAR(200) NULL,-->
+        <!--[MediaUrlsCamera4] VARCHAR(200) NULL,-->
+        <!--[LocationId] BIGINT NULL,-->
+        <!--[SpeedLimit] FLOAT NULL,-->
+        <!--);-->
+        <createTable schemaName="sl" tableName="SpeedLayerEvent" remarks="Contains events for speed layer.">
+            <column name="ObservedDay" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DurableId" type="varchar(36)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IngestedDateUtc" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SubscriptionId" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LineageCode" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PersistedDateUtc" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DriverDurableKey" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="VehicleDurableKey" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TotalOccurrences" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="TotalTimeSeconds" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EventTypeId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EventId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="DriverId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="AssetId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="Value" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EndDateTime" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="StartDateTime" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EventCategory" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="StartOdometerKilometres" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="StartPositionTimestamp" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="StartPositionLongitude" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="StartPositionLatitude" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="StartPositionPositionId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="StartPositionSpeedKilometresPerHour" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EndOdometerKilometres" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EndPositionTimestamp" type="datetime2(5)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EndPositionLongitude" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EndPositionLatitude" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EndPositionPositionId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="EndPositionSpeedKilometresPerHour" type="float">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ValueType" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ValueUnits" type="varchar(36)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="MediaUrlsRoad" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="MediaUrlsCab" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="MediaUrlsCamera3" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="MediaUrlsCamera4" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="LocationId" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="SpeedLimit" type="float">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <!--Create index for sl.SpeedLayerEvent table-->
+        <sql dbms="mssql">
+            CREATE CLUSTERED INDEX [IX_speed_layer_event_day_vehicle_time]
+            ON [sl].[SpeedLayerEvent]([ObservedDay] ASC, [SubscriptionId] ASC, [VehicleDurableKey] ASC, [StartDateTime] ASC, [EventId] ASC, [EventTypeId] ASC, [PersistedDateUtc] ASC)
+            ON [ps_DayOfTheYear] ([ObservedDay]);
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="Dmitriy Kozhin">
+        <!--Create sl.sp_TruncateOldPartitions procedure-->
+        <sql dbms="mssql">
+            CREATE PROCEDURE [sl].[sp_TruncateOldPartitions]
+                @factTableNameIdx SMALLINT = 1,
+                @keepDays SMALLINT = 7,
+                @mixinCurrentDate DATETIME = NULL
+            AS
+            BEGIN
+                SET NOCOUNT ON
+
+                IF (ISNULL(@factTableNameIdx, -1) &lt; 1  OR @factTableNameIdx &gt; 2)
+                BEGIN
+                    RAISERROR('Invalid parameter: @factTableNameIdx cannot be NULL or non-positive or greater than 2.', 18, 0)
+                    RETURN
+                END
+
+                IF (ISNULL(@keepDays, -1) &lt; 1  OR @keepDays &gt; 364)
+                BEGIN
+                    RAISERROR('Invalid parameter: @keepDays cannot be NULL or non-positive or greater than 364.', 18, 0)
+                    RETURN
+                END
+
+                DECLARE @currentDate DATETIME = ISNULL(@mixinCurrentDate, GETUTCDATE())
+                DECLARE @currentDayNumber SMALLINT = DATEPART(dy, @currentDate)
+
+                DECLARE @lowerBound SMALLINT = 1
+                DECLARE @upperBound SMALLINT = DATEPART(dy, DATEADD(DAY, -@keepDays, @currentDate))
+
+                IF (@currentDayNumber &lt;= @upperBound)
+                BEGIN
+                    SET @lowerBound = @currentDayNumber + 1
+                END
+
+                DECLARE @tableName SYSNAME = CASE @factTableNameIdx
+                    WHEN 1 THEN 'SpeedLayerPosition'
+                    WHEN 2 THEN 'SpeedLayerEvent'
+                END
+                SET @tableName = '[sl].' + QUOTENAME(@tableName)
+
+                PRINT 'Truncating table ' + @tableName + ' to keep '
+                + CAST(@keepDays AS VARCHAR) + ' days of data starting with day of year '
+                + CAST(@upperBound AS VARCHAR) + ' ('
+                + CAST(DATEADD(DAY, -@keepDays, @currentDate) AS VARCHAR) + ')'
+
+                DECLARE @sql nvarchar(4000)
+                SET @sql = 'TRUNCATE TABLE ' + @tableName + ' WITH (PARTITIONS(@partition))'
+
+                DECLARE @partition SMALLINT = @lowerBound
+                WHILE @partition &lt; @upperBound
+                BEGIN
+                    EXEC sys.sp_executesql @sql, N'@partition SMALLINT', @partition = @partition
+                    PRINT 'Truncated partition ' + CAST(@partition AS VARCHAR)
+
+                    SET @partition = @partition + 1
+                END
+
+                RETURN 0
+            END
+        </sql>
+    </changeSet>
+
+    <changeSet id="2-tag" author="Dmitriy Kozhin">
+        <tagDatabase tag="version_0.2.0"/>
+    </changeSet>
+
+    <changeSet id="3" author="Vadim Volkov">
+        <comment>Story 1014602: optimize SpeedLayer DB for SETRA queries </comment>
+        <!--Create global non-partitioned index for sl.SpeedLayerEvent table on DurableId-->
+        <sql dbms="mssql">
+            CREATE NONCLUSTERED INDEX [IX_speed_layer_event_durableId]
+            ON [sl].[SpeedLayerEvent] ([DurableId] ASC)
+            WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = ON, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+        </sql>
+
+        <!--Create global non-partitioned index for sl.SpeedLayerEvent table on IngestedDateUtc-->
+        <sql dbms="mssql">
+            CREATE NONCLUSTERED INDEX [IX_speed_layer_event_ingested_date]
+            ON [sl].[SpeedLayerEvent] ([IngestedDateUtc] ASC)
+            WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = ON, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+        </sql>
+
+        <!--Create global non-partitioned index for sl.SpeedLayerPosition table on IngestedDateUtc-->
+        <sql dbms="mssql">
+            CREATE NONCLUSTERED INDEX [IX_speed_layer_position_ingested_date]
+            ON [sl].[SpeedLayerPosition] ([IngestedDateUtc] ASC)
+            WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = ON, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+        </sql>
+
+        <!--Create global non-partitioned index for sl.SpeedLayerPosition table on IngestedDateUtc-->
+        <sql dbms="mssql">
+            CREATE NONCLUSTERED INDEX [IX_speed_layer_position_vehicle_key_timestamp]
+            ON [sl].[SpeedLayerPosition]
+            (
+                [VehicleDurableKey] ASC,
+                [Timestamp] ASC
+            )
+            WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = ON, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+        </sql>
+        <rollback>
+            <sql dbms="mssql">
+                DROP INDEX IF EXISTS [IX_speed_layer_event_durableId] ON [sl].[SpeedLayerEvent];
+                DROP INDEX IF EXISTS [IX_speed_layer_event_ingested_date] ON [sl].[SpeedLayerEvent];
+                DROP INDEX IF EXISTS [IX_speed_layer_position_ingested_date] ON [sl].[SpeedLayerPosition];
+                DROP INDEX IF EXISTS [IX_speed_layer_position_vehicle_key_timestamp] ON [sl].[SpeedLayerPosition];
+            </sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="3-tag" author="Vadim Volkov">
+        <tagDatabase tag="version_0.3.0"/>
+    </changeSet>
+
+
+    <changeSet id="4" author="Valerii Florov">
+        <!--udf -->
+        <sql dbms="mssql" splitStatements="false" endDelimiter=";">
+            CREATE FUNCTION [dbo].[udf_GetDistanceKm]
+            (@lat1deg  [REAL]
+            , @long1deg [REAL]
+            , @lat2deg  [REAL]
+            , @long2deg [REAL]
+            )
+            RETURNS FLOAT
+            AS
+            BEGIN
+            DECLARE @Result FLOAT = 0;
+            DECLARE @cEathR FLOAT = 6371.0;
+            IF @lat1deg IS NOT NULL
+            AND @long1deg IS NOT NULL
+            AND @lat2deg IS NOT NULL
+            AND @long2deg IS NOT NULL
+            BEGIN
+            DECLARE @cPi FLOAT = PI();
+            DECLARE @lat1rad  FLOAT = RADIANS(@lat1deg)
+            , @long1rad FLOAT = RADIANS(@long1deg)
+            , @lat2rad  FLOAT = RADIANS(@lat2deg)
+            , @long2rad FLOAT = RADIANS(@long2deg);
+            DECLARE @halfDeltaLat  FLOAT = (@lat2rad - @lat1rad) / 2.0
+            , @halfDeltaLong FLOAT = (@long2rad - @long1rad) / 2.0;
+
+            DECLARE @a FLOAT = SQUARE(SIN(@halfDeltaLat)) + COS(@lat1rad) * COS(@lat2rad) * SQUARE(SIN(@halfDeltaLong));
+            SET @result = @cEathR * 2.0 * ATN2(SQRT(@a), SQRT(1.0 - @a));
+            END;
+            RETURN @Result;
+            END;
+        </sql>
+
+        <!-- stored procedure-->
+        <sql dbms="mssql" splitStatements="false" endDelimiter=";">
+            CREATE PROCEDURE [dbo].[sp_GetNearbyVehicles]
+            (
+            @latitude      FLOAT
+            , @longitude     FLOAT
+            , @from          DATETIME
+            , @to            DATETIME
+            , @radiusMeters  FLOAT
+            , @maxItemsCount INT
+            )
+            AS
+            BEGIN
+            SET NOCOUNT ON;
+            DECLARE @observed_day_min SMALLINT = DATEPART(dayofyear, @from)
+            , @observed_day_max SMALLINT = DATEPART(dayofyear, @to);
+            WITH T(
+            [SubscriptionId]
+            , [VehicleId]
+            , [DriverId]
+            , [ObservedDay]
+            , [Time]
+            , [DistanceKm]
+            )
+            AS (
+            SELECT
+            p.SubscriptionId
+            , p.VehicleDurableKey
+            , p.DriverDurableKey
+            , p.ObservedDay
+            , p.Timestamp
+            , [dbo].udf_GetDistanceKm(p.[Latitude], p.[Longitude], @latitude, @longitude) AS [DistanceKm]
+            FROM
+            [sl].[SpeedLayerPosition] p
+            )
+            SELECT TOP (@maxItemsCount)
+            t.[SubscriptionId]
+            , t.[VehicleId]
+            , t.[DriverId]
+            , MIN(t.[DistanceKm]) AS DistanceKmMin
+            , MAX(t.[DistanceKm]) AS DistanceKmMax
+            , MIN(t.[Time]) AS TimeMin
+            , MAX(t.[Time]) AS TimeMax
+            FROM
+            t
+            WHERE 1 = 1
+            AND t.[ObservedDay] BETWEEN @observed_day_min AND @observed_day_max
+            AND t.[DistanceKm] &lt;= @radiusMeters / 1000.0
+            AND t.[Time] BETWEEN @from AND @to
+            GROUP BY
+            t.[SubscriptionId]
+            , t.[VehicleId]
+            , t.[DriverId]
+            ORDER BY
+            MIN(t.[DistanceKm])
+            , MIN(t.[Time]);
+            END;
+        </sql>
+    </changeSet>
+
+    <changeSet id="4-tag" author="Valerii Florov">
+        <tagDatabase tag="version_0.4.0"/>
+    </changeSet>
+
+
+</databaseChangeLog>

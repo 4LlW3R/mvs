@@ -1,0 +1,22 @@
+[
+	{
+		"ID": "1",
+		"PartitionId": "1",
+		"EntityType": "1",
+		"EntitySuperType": "2",
+		"SeqNo": "0",
+		"LastSyncDateUtc": "2019-10-22T09:21:00Z",
+		"LastSyncElementCount": "0",
+		"TotalElementsCount": "0"
+	},
+	{
+		"ID": "2",
+		"PartitionId": "2",
+		"EntityType": "1",
+		"EntitySuperType": "2",
+		"SeqNo": "0",
+		"LastSyncDateUtc": "2019-10-22T09:21:00Z",
+		"LastSyncElementCount": "0",
+		"TotalElementsCount": "0"
+	}
+]

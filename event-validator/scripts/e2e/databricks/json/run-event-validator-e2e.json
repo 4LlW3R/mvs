@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.event.validator.EventValidatorDriver",
+  "--name",
+  "Analytics_EventValidator",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332testtco/tmp/logs/Analytics_EventValidator -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332testtco/distr/1.8.0-RC/event-validator/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332testtco/tmp/logs/Analytics_EventValidator -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332testtco/distr/1.8.0-RC/event-validator/log4j.properties",
+  "dbfs:/mnt/mvsdatalaket332testtco/distr/1.8.0-RC/event-validator/event-validator-1.8.0-RC.jar",
+  "--appName",
+  "Analytics_EventValidator",
+  "--factoryClassName",
+  "com.epam.tcodata.event.validator.factory.impl.EventValidatorFactory"
+]

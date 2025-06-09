@@ -1,0 +1,14 @@
+[
+	{
+		"ID": "1",
+		"AccountName": "vadim_volkov@epam.com",
+		"AccountKeyVaultName": "vadim-volkov",
+		"Active": false
+	},
+	{
+		"ID": "2",
+		"AccountName": "tcomixqa@tengizchevroil.com",
+		"AccountKeyVaultName": "tcomixqa",
+		"Active": true
+	}
+]

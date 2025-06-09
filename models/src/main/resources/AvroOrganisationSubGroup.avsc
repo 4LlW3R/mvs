@@ -1,0 +1,48 @@
+{
+  "type": "record",
+  "name": "AvroOrganisationSubGroup",
+  "namespace": "com.epam.tcodata.models.avro.dimension",
+  "fields": [
+	    {
+            "name": "durableId",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "ingestedDateUtc",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "subscriptionId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "lineageCode",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "schemaVersion",
+            "doc": "Transport message support: avro schema version number",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "groupId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "parentOrgId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "parentSubGroupId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "name",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "type",
+            "type": ["null", "string"]
+        }
+    ]
+}

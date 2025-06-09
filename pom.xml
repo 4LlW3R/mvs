@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.epam.tcodata</groupId>
+    <artifactId>tco-mvs</artifactId>
+    <version>1.8.0-RC</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>libs</module>
+        <module>secure-storage-dal</module>
+        <module>models</module>
+        <module>redis-dal</module>
+        <module>sql-dal</module>
+        <module>hive-dal</module>
+        <module>eventhub-dal</module>
+        <module>mdm</module>
+        <module>redis-manager</module>
+        <module>event-validator</module>
+        <module>internal-pumps</module>
+        <module>external-pumps</module>
+        <module>raw-prepared-etl</module>
+        <module>token-manager</module>
+        <module>analytics</module>
+        <module>road-condition-violation-stream-datalake</module>
+        <module>overtaking-violation-stream-datalake</module>
+        <module>common</module>
+        <module>application-manager</module>
+        <module>mock</module>
+        <module>tcodata-deployment</module>
+    </modules>
+
+    <organization>
+        <name>EPAM Systems</name>
+        <url>http://epam.com</url>
+    </organization>
+
+    <issueManagement>
+        <system>VSTS</system>
+        <url>https://dev.azure.com/chevron/TCO-MVS-BI_APPS</url>
+    </issueManagement>
+
+    <properties>
+        <!-- || Main Properties || -->
+        <!-- lets align with DataBricks runtimes instead of HDInsight/HDP:
+            End Of Support info
+            https://docs.azuredatabricks.net/release-notes/runtime/databricks-runtime-ver.html#cluster-versions
+            5.2 (current) - Sep 30, 2019
+            5.5 LTS (proposed) - Jul 12, 2021
+
+            component versions
+            5.2 (current)
+            https://docs.azuredatabricks.net/release-notes/runtime/5.2.html
+            Operating System: Ubuntu 16.04.5 LTS
+            Java: 1.8.0_191
+            Scala:  2.11.8
+            Spark: 2.4.0
+
+            5.5 LTS (proposed after 2019-Oct-01):
+            https://docs.azuredatabricks.net/release-notes/runtime/5.5.html
+            Operating System: Ubuntu 16.04.6 LTS
+            Java: 1.8.0_212
+            Scala: 2.11.12
+            Spark: 2.4.3
+        -->
+        <maven.version>3.6.1</maven.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <scala.version>2.12</scala.version>
+        <scala.xml.version>2.1.0</scala.xml.version>
+        <scala.full.version>${scala.version}.15</scala.full.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <s>${file.separator}</s>
+
+        <!-- || Plugins Versions || -->
+        <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
+        <maven-shade-plugin.version>3.5.0</maven-shade-plugin.version>
+        <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+        <maven-pmd-plugin.version>3.13.0</maven-pmd-plugin.version>
+        <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
+        <maven-site-plugin.version>4.0.0-M9</maven-site-plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
+        <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+        <maven-jar-plugin.version>3.1.0</maven-jar-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <maven-remote-resources-plugin.version>3.0.0</maven-remote-resources-plugin.version>
+        <avro-maven-plugin.version>1.8.2</avro-maven-plugin.version>
+        <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
+        <maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+
+        <!-- || Plugins Configurations || -->
+        <!-- |Compiler| -->
+        <debug.compiler>true</debug.compiler>
+        <optimize.compiler>false</optimize.compiler>
+        <fail.on.error.compiler>true</fail.on.error.compiler>
+        <!-- |Dependency| -->
+        <output.directory.dependency>${project.build.directory}${s}lib</output.directory.dependency>
+        <over.write.releases.dependency>false</over.write.releases.dependency>
+        <over.write.snapshots.dependency>false</over.write.snapshots.dependency>
+        <over.write.if.newer.dependency>true</over.write.if.newer.dependency>
+        <silent.dependency>true</silent.dependency>
+        <!-- |Checkstyle| -->
+        <config.location.checkstyle>tcodata/sca-rulesets/checkstyle.xml</config.location.checkstyle>
+        <suppressions.location.checkstyle>tcodata/sca-rulesets/checkstyle-suppressions.xml
+        </suppressions.location.checkstyle>
+        <fail.on.violation.checkstyle>true</fail.on.violation.checkstyle>
+        <console.output.checkstyle>true</console.output.checkstyle>
+        <log.violations.to.console.checkstyle>true</log.violations.to.console.checkstyle>
+        <max.allowed.violations.checkstyle>0</max.allowed.violations.checkstyle>
+        <violation.severity.checkstyle>info</violation.severity.checkstyle>
+        <!-- |PMD| -->
+        <fail.on.violation.pmd>true</fail.on.violation.pmd>
+        <print.failing.errors.pmd>true</print.failing.errors.pmd>
+        <analysis.cache.pmd>true</analysis.cache.pmd>
+        <!-- |Findbugs| -->
+        <fail.on.error.findbugs>true</fail.on.error.findbugs>
+        <effort.findbugs>Max</effort.findbugs>
+        <threshold.findbugs>low</threshold.findbugs>
+        <xml.output.findbugs>true</xml.output.findbugs>
+        <exclude.filter.file.findbugs>tcodata/sca-rulesets/findbugs-exclude.xml
+        </exclude.filter.file.findbugs> <!-- TO DO check -->
+
+        <!-- || Dependencies versions || -->
+        <!-- |Inner| -->
+        <code-quality.version>${project.version}</code-quality.version>
+        <!-- |Avro (and related)| -->
+        <avro.version>1.8.2</avro.version>
+        <joda-time.version>2.9.9</joda-time.version>
+        <!-- |Hadoop/Spark Hortonworks| -->
+        <spark.version>3.4.1</spark.version>
+        <spark.older.version>2.2.0</spark.older.version>
+        <!-- Spark UI (integration tests) -->
+        <scala-xml.version>1.1.0</scala-xml.version>
+        <!-- |Azure| -->
+        <!-- Azure EventHubs -->
+        <!--NOSONAR        <azure-eventhubs.version>2.3.2</azure-eventhubs.version>-->
+        <azure-eventhubs.version>3.3.0</azure-eventhubs.version>
+        <!--NOSONAR        <azure-eventhubs-spark.version>2.3.13</azure-eventhubs-spark.version>-->
+        <azure-eventhubs-spark.version>2.3.18</azure-eventhubs-spark.version>
+        <!-- Key Vault -->
+        <azure-keyvault.version>1.0.0</azure-keyvault.version>
+        <adal4j.version>1.2.0</adal4j.version>
+        <!-- Other (Azure related somehow TO DO check) -->
+        <proton-j.version>0.27.1</proton-j.version>
+        <!-- |Database| -->
+        <!-- MS SQL -->
+        <mssql-jdbc.version>7.2.2.jre8</mssql-jdbc.version>
+        <!-- H2 SQL-->
+        <h2sql.version>1.4.199</h2sql.version>
+        <!-- JDBI -->
+        <jdbi.version>3.12.2</jdbi.version>
+        <!-- Liquibase -->
+        <liquibase-core.version>3.8.6</liquibase-core.version>
+        <!-- Redis -->
+        <jedis.version>2.9.0</jedis.version>
+        <!-- |Esri| -->
+        <esri-geometry-api.version>2.0.0</esri-geometry-api.version>
+        <!-- GeoJson Jackson -->
+        <geojson-jackson.version>1.8</geojson-jackson.version>
+        <!-- |Other| -->
+        <!-- Xerces -->
+        <xerces-impl.version>2.9.1</xerces-impl.version>
+        <!-- Commons -->
+        <commons-cli.version>1.4</commons-cli.version>
+        <commons-collections4.version>4.3</commons-collections4.version>
+<!--        <commons-lang3.version>3.6</commons-lang3.version>-->
+        <commons-lang3.version>3.10</commons-lang3.version>
+        <commons-math3.version>3.6.1</commons-math3.version>
+        <commons-csv.version>1.5</commons-csv.version>
+        <!-- Jackson (fasterxml) -->
+<!--NOSONAR        <jackson.version>2.9.7</jackson.version>-->
+        <jackson.version>2.13.5</jackson.version>
+        <!-- Jackson (fasterxml module scala) -->
+        <jackson.scala.module.version>2.15.2</jackson.scala.module.version>
+        <!-- Jackson (codehaus) -->
+        <jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+        <!-- JSON -->
+        <json.version>20180813</json.version>
+        <!-- JAVAX -->
+        <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+        <!-- HTTP -->
+        <httpclient.version>4.5.12</httpclient.version>
+        <httpcore.version>4.4.9</httpcore.version>
+        <!-- SunriseSunsetCalculator -->
+        <sunrise.sunset.calculator.version>1.2</sunrise.sunset.calculator.version>
+        <!-- Guava -->
+        <guava.version>27.0.1-jre</guava.version>
+        <!-- Findbugs -->
+        <findbugs.version>3.0.1</findbugs.version>
+        <!-- |Check Style| -->
+        <checkstyle.version>8.10</checkstyle.version>
+        <!-- |Logging| -->
+        <slf4j-log4j12.version>2.0.7</slf4j-log4j12.version>
+        <!-- |Testing| -->
+        <junit.version>4.12</junit.version>
+        <mockito-all.version>1.9.5</mockito-all.version>
+        <mockito-core.version>3.2.0</mockito-core.version>
+        <hamcrest-library.version>1.3</hamcrest-library.version>
+<!--NOSONAR        <spark-testing-base.version>2.4.0_0.11.0</spark-testing-base.version>-->
+        <spark-testing-base.version>3.4.0_1.4.3</spark-testing-base.version>
+        <!--Mock REST Server-->
+        <mockserver-netty.version>5.5.1</mockserver-netty.version>
+        <io.netty-all.version>4.1.68.Final</io.netty-all.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Scala -->
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala.full.version}</version>
+            </dependency>
+
+            <!-- Avro -->
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
+            </dependency>
+
+            <!-- Apache Spark -->
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-core_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-streaming_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-hive_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.hive</groupId>
+                        <artifactId>hive-metastore</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+<!--            TEMP CHANGE to test -->
+            <!-- https://mvnrepository.com/artifact/org.apache.hive/hive-metastore -->
+            <dependency>
+                <groupId>org.apache.hive</groupId>
+                <artifactId>hive-metastore</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+
+            <!-- Spark UI (integration tests) -->
+            <dependency>
+                <groupId>org.scala-lang.modules</groupId>
+                <artifactId>scala-xml_${scala.version}</artifactId>
+                <version>${scala-xml.version}</version>
+            </dependency>
+
+            <!-- Azure -->
+            <!-- EventHubs -->
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-eventhubs</artifactId>
+                <version>${azure-eventhubs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-eventhubs-spark_${scala.version}</artifactId>
+                <version>${azure-eventhubs-spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-eventhubs-spark_2.11</artifactId>
+                <version>2.3.22</version>
+            </dependency>
+            <!-- Key Vault -->
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-keyvault</artifactId>
+                <version>${azure-keyvault.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>adal4j</artifactId>
+                <version>${adal4j.version}</version>
+            </dependency>
+            <!-- Database -->
+            <!-- MS SQL -->
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>mssql-jdbc</artifactId>
+                <version>${mssql-jdbc.version}</version>
+            </dependency>
+            <!-- H2 SQL-->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2sql.version}</version>
+            </dependency>
+            <!-- JDBI -->
+            <dependency>
+                <groupId>org.jdbi</groupId>
+                <artifactId>jdbi3-core</artifactId>
+                <version>${jdbi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jdbi</groupId>
+                <artifactId>jdbi3-sqlobject</artifactId>
+                <version>${jdbi.version}</version>
+            </dependency>
+            <!-- Liquibase -->
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase-core.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>logback-classic</artifactId>
+                        <groupId>ch.qos.logback</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>logback-core</artifactId>
+                        <groupId>ch.qos.logback</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- Redis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!-- Esri -->
+            <dependency>
+                <groupId>com.esri.geometry</groupId>
+                <artifactId>esri-geometry-api</artifactId>
+                <version>${esri-geometry-api.version}</version>
+            </dependency>
+            <!-- GeoJson Jackson -->
+            <dependency>
+                <groupId>de.grundid.opendatalab</groupId>
+                <artifactId>geojson-jackson</artifactId>
+                <version>${geojson-jackson.version}</version>
+            </dependency>
+
+            <!-- Other -->
+            <!-- Xerces -->
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>${xerces-impl.version}</version>
+            </dependency>
+            <!-- Commons -->
+            <dependency>
+                <groupId>commons-cli</groupId>
+                <artifactId>commons-cli</artifactId>
+                <version>${commons-cli.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>${commons-math3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>${commons-csv.version}</version>
+            </dependency>
+            <!-- Jackson (fasterxml) -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-scala_${scala.version}</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-joda</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- Jackson (codehaus) -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson-mapper-asl.version}</version>
+            </dependency>
+            <!-- JSON -->
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${json.version}</version>
+            </dependency>
+            <!-- Javax -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet-api.version}</version>
+            </dependency>
+            <!-- HTTP Client -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- SunriseSunsetCalculator -->
+            <dependency>
+                <groupId>com.luckycatlabs</groupId>
+                <artifactId>SunriseSunsetCalculator</artifactId>
+                <version>${sunrise.sunset.calculator.version}</version>
+            </dependency>
+            <!-- Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- Findbugs -->
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>findbugs</artifactId>
+                <version>${findbugs.version}</version>
+            </dependency>
+
+            <!-- Logging -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j-log4j12.version}</version>
+            </dependency>
+
+            <!-- Testing -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito-all.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito-core.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${hamcrest-library.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.holdenkarau</groupId>
+                <artifactId>spark-testing-base_${scala.version}</artifactId>
+                <version>${spark-testing-base.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--Mock REST Server-->
+            <dependency>
+                <groupId>org.mock-server</groupId>
+                <artifactId>mockserver-netty</artifactId>
+                <version>${mockserver-netty.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- Validation (do not override in children pom, it is placed inbuild -> plugins section
+                in parent pom which is enough to work in all sub-projects) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-maven-version</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>${maven.version}</version>
+                                    </requireMavenVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Compiling -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <debug>${debug.compiler}</debug>
+                        <optimize>${optimize.compiler}</optimize>
+                        <failOnError>${fail.on.error.compiler}</failOnError>
+                    </configuration>
+                </plugin>
+
+                <!-- Copying Dependencies to Target/lib -->
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven-dependency-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${output.directory.dependency}</outputDirectory>
+                                <overWriteReleases>${over.write.releases.dependency}</overWriteReleases>
+                                <overWriteSnapshots>${over.write.snapshots.dependency}</overWriteSnapshots>
+                                <overWriteIfNewer>${over.write.if.newer.dependency}</overWriteIfNewer>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <silent>${silent.dependency}</silent>
+                    </configuration>
+                </plugin>
+
+                <!-- Building Uber Jar -->
+                <plugin>
+                    <configuration>
+                        <transformers>
+                            <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            </transformer>
+                        </transformers>
+                        <filters>
+                            <filter>
+                                <artifact>*:*</artifact>
+                                <excludes>
+                                    <exclude>conf/*.properties</exclude>
+                                    <exclude>META-INF/*.SF</exclude>
+                                    <exclude>META-INF/*.DSA</exclude>
+                                    <exclude>META-INF/*.RSA</exclude>
+                                </excludes>
+                            </filter>
+                        </filters>
+                        <artifactSet>
+                            <excludes>
+                                <exclude>org.apache.calcite:*</exclude>
+                                <exclude>org.apache.curator:*</exclude>
+                                <exclude>org.apache.hadoop:*</exclude>
+                                <exclude>org.apache.hive:*</exclude>
+                                <exclude>org.apache.htrace:*</exclude>
+                                <exclude>org.apache.parquet:*</exclude>
+                                <exclude>org.apache.spark:*</exclude>
+                                <exclude>org.apache.thrift:*</exclude>
+                                <exclude>org.apache.zookeeper:*</exclude>
+                            </excludes>
+                        </artifactSet>
+                        <shadedArtifactAttached>true</shadedArtifactAttached>
+                        <relocations>
+                            <relocation>
+                                <pattern>org.apache.avro</pattern>
+                                <shadedPattern>shaded.org.apache.avro</shadedPattern>
+                            </relocation>
+                            <relocation>
+                                <pattern>avro</pattern>
+                                <shadedPattern>shaded.avro</shadedPattern>
+                            </relocation>
+                            <relocation>
+                                <pattern>org.apache.commons</pattern>
+                                <shadedPattern>shaded.org.apache.commons</shadedPattern>
+                            </relocation>
+                        </relocations>
+                    </configuration>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${maven-shade-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Code Style -->
+                <!-- TO DO check, adjust configuration -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.epam.tcodata</groupId>
+                            <artifactId>code-quality</artifactId>
+                            <version>${code-quality.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${checkstyle.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <configLocation>${config.location.checkstyle}</configLocation>
+                        <suppressionsLocation>${suppressions.location.checkstyle}</suppressionsLocation>
+                        <failOnViolation>${fail.on.violation.checkstyle}</failOnViolation>
+                        <consoleOutput>${console.output.checkstyle}</consoleOutput>
+                        <logViolationsToConsole>${log.violations.to.console.checkstyle}</logViolationsToConsole>
+                        <maxAllowedViolations>${max.allowed.violations.checkstyle}</maxAllowedViolations>
+                        <violationSeverity>${violation.severity.checkstyle}</violationSeverity>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- TO DO check, adjust configuration -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${maven-pmd-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.epam.tcodata</groupId>
+                            <artifactId>code-quality</artifactId>
+                            <version>${code-quality.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <failOnViolation>${fail.on.violation.pmd}</failOnViolation>
+                        <printFailingErrors>${print.failing.errors.pmd}</printFailingErrors>
+                        <analysisCache>${analysis.cache.pmd}</analysisCache>
+                        <targetJdk>${java.version}</targetJdk>
+                        <linkXRef>false</linkXRef>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                                <goal>cpd-check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- TO DO check, fix configuration -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${findbugs-maven-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.epam.tcodata</groupId>
+                            <artifactId>code-quality</artifactId>
+                            <version>${code-quality.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <failOnError>${fail.on.error.findbugs}</failOnError>
+                        <effort>${effort.findbugs}</effort>
+                        <threshold>${threshold.findbugs}</threshold>
+                        <xmlOutput>${xml.output.findbugs}</xmlOutput>
+                        <excludeFilterFile>${exclude.filter.file.findbugs}</excludeFilterFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Documentation -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-project-info-reports-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+
+                <!-- Test -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <skipIfEmpty>true</skipIfEmpty>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>test-jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+
+                <!-- Remote Resource Bundles (used for Avro) -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-remote-resources-plugin</artifactId>
+                    <version>${maven-remote-resources-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>bundle</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <includes>
+                            <include>**/*.avsc</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+
+                <!-- Avro Class Creation -->
+                <plugin>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro-maven-plugin</artifactId>
+                    <version>${avro-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>schema</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Build Helper (adds more source directories) -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${build-helper-maven-plugin.version}</version>
+                </plugin>
+
+                <!-- Deployment -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
+                    <configuration>
+                        <appendAssemblyId>false</appendAssemblyId>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <formats>
+                            <format>zip</format>
+                        </formats>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <!-- Validation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <!-- Code Analysis -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Documentation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <!-- Test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>

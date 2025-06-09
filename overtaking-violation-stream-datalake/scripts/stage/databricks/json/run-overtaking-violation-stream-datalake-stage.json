@@ -1,0 +1,17 @@
+[
+  "--class",
+  "com.epam.tcodata.overtaking.violation.stream.datalake.OvertakingViolationStreamDataLakeDriver",
+  "--name",
+  "OvertakingViolationStreamDataLake",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/OvertakingViolationStreamDataLake -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/overtaking-violation-stream-datalake/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/OvertakingViolationStreamDataLake -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/overtaking-violation-stream-datalake/log4j.properties",
+  "dbfs:/mnt/mvsdatalakep332stagetco/distr/overtaking-violation-stream-datalake/overtaking-violation-stream-datalake-1.8.0-RC.jar",
+  "--factoryClassName",
+  "com.epam.tcodata.overtaking.violation.stream.datalake.factory.ConfirmedOvertakingFactory",
+  "--appName",
+  "OvertakingViolationStreamDataLake",
+  "--batchIntervalSeconds",
+  "180"
+]

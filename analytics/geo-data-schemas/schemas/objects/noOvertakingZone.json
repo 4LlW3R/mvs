@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "NoOvertakingZone",
+  "id": "noOvertakingZone.json",
+  "allOf": [
+    {
+      "$ref": "geojson.json"
+    },
+    {
+      "$ref": "definitions.json#/definitions/noOvertakingZone"
+    },
+    {
+      "$ref": "definitions.json#/definitions/geojsonProperties"
+    }
+  ]
+}

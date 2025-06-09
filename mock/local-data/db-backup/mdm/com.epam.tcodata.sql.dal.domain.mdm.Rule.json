@@ -1,0 +1,92 @@
+[
+	{
+		"id": "1",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "DRIVER",
+		"naturalKeyName": "driverId"
+	},
+		{
+		"id": "2",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "ASSET",
+		"naturalKeyName": "assetId"
+	},
+		{
+		"id": "3",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "LIBRARY_EVENT",
+		"naturalKeyName": "eventTypeId"
+	},
+		{
+		"id": "4",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "LOCATION",
+		"naturalKeyName": "locationId"
+	},
+		{
+		"id": "5",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "ORGANISATION_GROUP",
+		"naturalKeyName": "groupId"
+	},
+	{
+		"id": "6",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "POSITION",
+		"naturalKeyName": "positionId"
+	},
+		{
+		"id": "7",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "EVENT",
+		"naturalKeyName": "eventId"
+	},
+		{
+		"id": "8",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "TRIP",
+		"naturalKeyName": "tripId"
+	},
+		{
+		"id": "9",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "SUBTRIP",
+		"naturalKeyName": "subTripId"
+	},
+	{
+		"id": "10",
+		"active": true,
+		"apiVersion": "API_2_0",
+		"version": "VERSION_1_0",
+		"subscription": "*",
+		"entityType": "ORGANISATION_SUBGROUP",
+		"naturalKeyName": "groupId"
+	}
+]

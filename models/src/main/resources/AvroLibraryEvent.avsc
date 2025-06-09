@@ -1,0 +1,52 @@
+{
+    "type": "record",
+    "name": "AvroLibraryEvent",
+    "namespace": "com.epam.tcodata.models.avro.dimension",
+    "fields": [
+	    {
+            "name": "durableId",
+            "type": ["null", "string"]
+        },
+	    {
+            "name": "ingestedDateUtc",
+            "type": {"type": "long", "logicalType": "timestamp-millis"}
+        },
+	    {
+            "name": "subscriptionId",
+            "type": ["null", "long"]
+        },
+	    {
+            "name": "lineageCode",
+            "type": ["null", "int"]
+        },
+	    {
+            "name": "schemaVersion",
+            "doc": "Transport message support: avro schema version number",
+            "type": ["null", "int"]
+        },
+        {
+            "name": "description",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "eventTypeId",
+            "type": ["null", "long"]
+        },
+        {
+            "name": "eventType",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "displayUnits",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "formatType",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "valueName",
+            "type": ["null", "string"]
+        }
+    ]
+}

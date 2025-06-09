@@ -1,0 +1,10 @@
+{
+      "frameworks": {
+          "net46": {
+              "dependencies": {
+                  "StackExchange.Redis":"1.1.603",
+                  "Newtonsoft.Json": "11.0.2"
+              }
+          }
+      }
+  }

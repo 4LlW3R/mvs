@@ -1,0 +1,23 @@
+[
+   {
+      "Timestamp":"2018-12-23T10:00:00Z",
+      "Longitude":53.4368057250977,
+      "Latitude":46.2434463500977,
+      "DriverId":-5281935399197317648,
+      "AssetId":7603173016397917061,
+      "PositionId":813495817443917829,
+      "IsAvl":true,
+      "Source":"Gps",
+      "OdometerKilometres":0,
+      "IgnitionOn":false,
+      "DistanceSinceReadingKilometres":17,
+      "AgeOfReadingSeconds":0,
+      "Pdop":0,
+      "Vdop":0,
+      "Hdop":1,
+      "NumberOfSatellites":10,
+      "Heading":186,
+      "AltitudeMetres":-22,
+      "SpeedKilometresPerHour":60
+   }
+]

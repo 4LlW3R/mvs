@@ -1,0 +1,36 @@
+CREATE DATABASE IF NOT EXISTS prepared;
+USE prepared;
+
+CREATE TABLE IF NOT EXISTS prepared.confirmed_overtaking_violation (
+    domain STRING,
+    entity_type INT,
+    schema_version INT,
+    id STRING,
+    policy_version INT,
+    source_type STRING,
+    passing_participant_vehicle_durable_id STRING,
+    passing_participant_driver_durable_id STRING,
+    passing_participant_interpolated_overtaking_velocity DOUBLE,
+    passed_participant_vehicle_durable_id STRING,
+    passed_participant_driver_durable_id STRING,
+    passed_participant_interpolated_overtaking_velocity DOUBLE,
+    passing_trajectory_start_latitude DOUBLE,
+    passing_trajectory_start_longitude DOUBLE,
+    passing_trajectory_start_time TIMESTAMP,
+    passing_trajectory_end_latitude DOUBLE,
+    passing_trajectory_end_longitude DOUBLE,
+    passing_trajectory_end_time TIMESTAMP,
+    passed_trajectory_start_latitude DOUBLE,
+    passed_trajectory_start_longitude DOUBLE,
+    passed_trajectory_start_time TIMESTAMP,
+    passed_trajectory_end_latitude DOUBLE,
+    passed_trajectory_end_longitude DOUBLE,
+    passed_trajectory_end_time TIMESTAMP,
+    time TIMESTAMP,
+    latitude DOUBLE,
+    longitude DOUBLE,
+    policy_area_ids ARRAY<STRING>,
+    violation_ids ARRAY<INT>,
+    validation_comment STRING,
+    unclassified_violation_description STRING)
+STORED AS ORC TBLPROPERTIES ("auto.purge"="true");

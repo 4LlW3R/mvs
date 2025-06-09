@@ -1,0 +1,73 @@
+{
+  "type": "Feature",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "epsg:4326"
+    }
+  },
+  "properties": {
+    "Description": "No overtaking",
+    "Road": "Unity Road",
+    "uuid": "2970c8c7-fe7e-4c64-8c57-b88c545c4952",
+    "version": 1,
+    "domain": "com.epam.tcodata.entity.geo.no.overtaking",
+    "startLatitude": 46.311322,
+    "startLongitude": 53.447102,
+    "endLatitude": 46.307168,
+    "endLongitude": 53.445918
+  },
+  "geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        53.447102,
+        46.311322
+      ],
+      [
+        53.446992,
+        46.310701
+      ],
+      [
+        53.446935,
+        46.310506
+      ],
+      [
+        53.446856,
+        46.310322
+      ],
+      [
+        53.446646,
+        46.309972
+      ],
+      [
+        53.446424,
+        46.309599
+      ],
+      [
+        53.446344,
+        46.30945
+      ],
+      [
+        53.446318,
+        46.309352
+      ],
+      [
+        53.446254,
+        46.309068
+      ],
+      [
+        53.446027,
+        46.307886
+      ],
+      [
+        53.44595,
+        46.307423
+      ],
+      [
+        53.445918,
+        46.307168
+      ]
+    ]
+  }
+}

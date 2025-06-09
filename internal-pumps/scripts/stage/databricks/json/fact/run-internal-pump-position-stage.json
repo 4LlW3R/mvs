@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.internal.pump.driver.InternalPumpStreamDriver",
+  "--name",
+  "InternalPump_Position",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/InternalPump_Position -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/internal-pumps/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/InternalPump_Position -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/internal-pumps/log4j.properties",
+  "dbfs:/mnt/mvsdatalakep332stagetco/distr/internal-pumps/internal-pumps-1.8.0-RC.jar",
+  "--factoryClassName",
+  "com.epam.tcodata.internal.pump.factory.fact.InternalPositionFactory",
+  "--batchIntervalSeconds",
+  "90"
+]

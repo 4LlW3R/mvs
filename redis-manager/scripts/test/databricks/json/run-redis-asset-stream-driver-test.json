@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.redis.manager.RedisAssetStreamDriver",
+  "--name",
+  "RedisManager_Asset",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332mqatco/tmp/logs/RedisManager_Asset -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332mqatco/distr/redis-manager/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332mqatco/tmp/logs/RedisManager_Asset -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalaket332mqatco/distr/redis-manager/log4j.properties",
+  "dbfs:/mnt/mvsdatalaket332mqatco/distr/redis-manager/redis-manager-1.8.0-RC.jar",
+  "--appName",
+  "RedisManager_Asset",
+  "--batchIntervalSeconds",
+  "600"
+]

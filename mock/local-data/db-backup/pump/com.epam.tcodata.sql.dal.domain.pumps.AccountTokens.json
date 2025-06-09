@@ -1,0 +1,10 @@
+[
+	{
+		"ID": "1",
+		"AccountId": "2",
+		"AccessToken": "access_token",
+		"RefreshToken": "refresh_token",
+		"LastSyncDateUtc": "2019-11-22T09:00:02Z",
+		"ExpirationDateUtc": "2019-11-22T10:00:02Z"
+	}
+]

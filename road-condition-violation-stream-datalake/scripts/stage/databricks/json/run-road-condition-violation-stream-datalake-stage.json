@@ -1,0 +1,17 @@
+[
+  "--class",
+  "com.epam.tcodata.road.condition.violation.stream.datalake.RoadConditionViolationStreamDataLakeDriver",
+  "--name",
+  "RoadConditionViolationStreamDataLake",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/RoadConditionViolationStreamDataLake -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/road-condition-violation-stream-datalake/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/RoadConditionViolationStreamDataLake -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/road-condition-violation-stream-datalake/log4j.properties",
+  "dbfs:/mnt/mvsdatalakep332stagetco/distr/road-condition-violation-stream-datalake/road-condition-violation-stream-datalake-1.8.0-RC.jar",
+  "--factoryClassName",
+  "com.epam.tcodata.road.condition.violation.stream.datalake.factory.RoadConditionFactory",
+  "--appName",
+  "RoadConditionViolationStreamDataLakeDriver",
+  "--batchIntervalSeconds",
+  "180"
+]

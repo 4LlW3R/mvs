@@ -1,0 +1,56 @@
+parameters:
+  profiles: ""
+  skipTests: false
+#  goals: "clean package"
+  goals: "clean"
+
+steps:
+- bash: |
+    echo "##vso[task.setvariable variable=CLIENT_ID]MOCK_VALUE"
+    echo "##vso[task.setvariable variable=CLIENT_SECRET]MOCK_VALUE"
+    echo "##vso[task.setvariable variable=VAULT_BASE_URL]MOCK_VALUE"
+    echo "##vso[task.setvariable variable=ENCRYPTION_KEY_ID]MOCK_VALUE"
+    echo "****** 2 ****** build_project.yml stepppp"
+  displayName: 'Set mock variables'
+- task: Maven@3
+  inputs:
+    mavenPomFile: "pom.xml"
+    goals: "${{ parameters.goals }}"
+    options: "--settings settings.xml -DskipTests=${{ parameters.skipTests }} -P${{ parameters.profiles }} -e"
+    mavenAuthenticateFeed: false
+    javaHomeOption: 'JDKVersion'
+#    javaHomeSelection: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkDirectory: "$(Build.BinariesDirectory)/jdk1.8.0_192"
+#    mavenVersionOption: 'path'
+    mavenVersionOption: '3.6.1'
+    mavenDirectory: "$(Build.BinariesDirectory)/apache-maven-3.6.1/bin"
+    mavenSetM2Home: true
+  displayName: 'Build project artifact'
+- bash: |
+    pwd
+    echo '****** 22 ****** build_project stepppp '
+    java --version
+    git branch
+    git checkout release-candidate-1.8-upgrade-cluster
+    git pull
+    echo '--------------------------'
+    cat /home/vsts/work/1/s/models/src/main/java/com/epam/tcodata/models/avro/fact/AvroPosition.java
+    echo '--------------------------'
+    cat /home/vsts/work/1/s/internal-pumps/src/main/java/com/epam/tcodata/internal/pump/converter/fact/PositionConverter.java
+    echo '--------------------------'
+- task: Maven@3
+  inputs:
+    mavenPomFile: "pom.xml"
+    goals: "package"
+    options: "--settings settings.xml -DskipTests=${{ parameters.skipTests }} -P${{ parameters.profiles }} -e"
+    mavenAuthenticateFeed: false
+    javaHomeOption: 'JDKVersion'
+    #    javaHomeSelection: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    jdkDirectory: "$(Build.BinariesDirectory)/jdk1.8.0_192"
+    #    mavenVersionOption: 'path'
+    mavenVersionOption: '3.6.1'
+    mavenDirectory: "$(Build.BinariesDirectory)/apache-maven-3.6.1/bin"
+    mavenSetM2Home: true
+  displayName: 'Build project artifact Package'

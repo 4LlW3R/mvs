@@ -1,0 +1,15 @@
+[
+  "--class",
+  "com.epam.tcodata.raw.prepared.etl.Driver",
+  "--name",
+  "RawPreparedEtl_Trip",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/RawPreparedEtl_Trip -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/raw-prepared-etl/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalakep332stagetco/tmp/logs/RawPreparedEtl_Trip -Dlog4j.configuration=file:/dbfs/mnt/mvsdatalakep332stagetco/distr/raw-prepared-etl/log4j.properties",
+  "dbfs:/mnt/mvsdatalakep332stagetco/distr/raw-prepared-etl/raw-prepared-etl-1.8.0-RC.jar",
+  "--appName",
+  "RawPreparedEtl_Trip",
+  "--factoryClassName",
+  "com.epam.tcodata.raw.prepared.etl.factory.impl.TripSDMFactory"
+]

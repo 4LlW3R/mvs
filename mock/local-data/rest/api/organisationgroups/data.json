@@ -1,0 +1,20 @@
+[
+  {
+    "GroupId": -8655792887104030903,
+    "Type": "OrganisationGroup",
+    "DisplayTimeZone": "Pakistan Standard Time",
+    "Name": "BTS - Weatherford Kazakhstan (Tcon)"
+  },
+  {
+    "GroupId": -8463266206350882415,
+    "Type": "OrganisationGroup",
+    "DisplayTimeZone": "Pakistan Standard Time",
+    "Name": "BTS - Sicim Kazakhstan (Tcon)"
+  },
+  {
+    "GroupId": -8288148457629866836,
+    "Type": "OrganisationGroup",
+    "DisplayTimeZone": "West Asia Standard Time",
+    "Name": "BTS - Green LLP (Tcon)"
+  }
+]

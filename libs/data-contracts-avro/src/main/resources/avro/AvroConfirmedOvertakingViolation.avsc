@@ -1,0 +1,161 @@
+{
+  "type": "record",
+  "name": "AvroConfirmedOvertakingViolation",
+  "namespace": "com.epam.tcodata.storage.avro.entities.events.overtaking.otdb",
+  "fields": [
+    {
+      "name": "domain",
+      "doc": "Unified transport header: domain indicates the domain of the event, e.g. 'analytics','external', 'guardian', and the producer, e.g. 'overtaking', 'congestion', dot-delimited",
+      "type": "string"
+    },
+    {
+      "name": "entityType",
+      "doc": "Unified transport header: entity type id in terms of domain specified before.",
+      "type": "int"
+    },
+    {
+      "name": "schemaVersion",
+      "doc": "Unified transport header: schema version used for pair of (domain, entityType) specified before.",
+      "type": "int"
+    },
+    {
+      "name": "id",
+      "doc": "Unified transport header: unique Id is constructed as such: $subscriptionIDA_$vehicleIDA-$subscriptionIDB_$vehicleIDB_$time-in-milliseconds",
+      "type": "string"
+    },
+    {
+      "name": "policyVersion",
+      "type": "int"
+    },
+    {
+      "name": "sourceType",
+      "doc": "Represents sources of OT events: auto detected or reported.",
+      "type": {
+        "type": "enum",
+        "name": "SourceTypeCode",
+        "symbols": [ "NOT_INITIALIZED", "DETECTED", "REPORTED" ]
+      }
+    },
+    {
+      "name": "passingParticipant",
+      "doc": "Passing (i.e. violator caused overtaking) overtaking participant description (Vehicle and Driver IDs)",
+      "type": {
+        "type": "record",
+        "name": "AvroOvertakingParticipant",
+        "doc": "Describes overtaking participant (Vehicle and Driver IDs)",
+        "fields": [
+          {
+            "name": "vehicleDurableID",
+            "type": "string",
+            "doc": "durable ID of vehicle (varchar(36))"
+          },
+          {
+            "name": "driverDurableID",
+            "type": "string",
+            "doc": "durable ID of Driver (varchar(36))"
+          },
+          {
+            "name": "interpolatedOvertakingVelocity",
+            "doc": "Velocity measured in km-per-hour in detected point of overtaking",
+            "type": "double"
+          }
+        ]
+      }
+    },
+    {
+      "name": "passedParticipant",
+      "type": "com.epam.tcodata.storage.avro.entities.events.overtaking.otdb.AvroOvertakingParticipant",
+      "doc": "Passed overtaking participant description."
+    },
+    {
+      "name": "passingTrajectory",
+      "doc": "Two points trajectory segment for passing overtaking participant.",
+      "type": {
+        "type": "record",
+        "doc": "Describes two nearest known positions between which was detected overtaking.",
+        "name": "AvroOvertakingPathSegment",
+        "fields": [
+          {
+            "name": "startLatitude",
+            "type": "double"
+          },
+          {
+            "name": "startLongitude",
+            "type": "double"
+          },
+          {
+            "name": "startTime",
+            "type": {
+              "type": "long",
+              "logicalType": "timestamp-millis"
+            }
+          },
+          {
+            "name": "endLatitude",
+            "type": "double"
+          },
+          {
+            "name": "endLongitude",
+            "type": "double"
+          },
+          {
+            "name": "endTime",
+            "type": {
+              "type": "long",
+              "logicalType": "timestamp-millis"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "passedTrajectory",
+      "type": "com.epam.tcodata.storage.avro.entities.events.overtaking.otdb.AvroOvertakingPathSegment",
+      "doc": "Two points trajectory segment for passed overtaking participant."
+    },
+    {
+      "name": "time",
+      "doc": "Timestamp of overtaking (UTC).",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "latitude",
+      "type": "double",
+      "doc": "Latitude of interpolated overtaking point in decimal degrees using EPSG:4326/WGS 84 spatial reference system."
+    },
+    {
+      "name": "longitude",
+      "type": "double",
+      "doc": "Longitude of interpolated overtaking point in decimal degrees using EPSG:4326/WGS 84 spatial reference system."
+    },
+    {
+      "name": "policyAreaIds",
+      "doc": "Array of detected policy area IDs.",
+      "type": {
+        "type": "array",
+        "items": "string"
+      }
+    },
+    {
+      "name": "violationIDs",
+      "doc": "Array of confirmed IDs of well-known violation types.",
+      "type": {
+        "type": "array",
+        "items": "int"
+      }
+    },
+    {
+      "name": "validationComment",
+      "doc": "Optional validation comment provided by operator.",
+      "type": "string"
+    },
+    {
+      "name": "unclassifiedViolationDescription",
+      "doc": "Description of unclassified 'other' violation not presented in catalog of known violations but added manually by operator.",
+      "type": "string"
+    }
+  ]
+}

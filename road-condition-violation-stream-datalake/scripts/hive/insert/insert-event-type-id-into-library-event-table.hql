@@ -1,0 +1,2 @@
+INSERT INTO raw.dim_library_event (durable_id, ingested_date_utc, subscription_id, lineage_code, persisted_date_utc, description, event_type_id, event_type, display_units, format_type, value_name)
+VALUES ('31802b3b114c4b759109acce5ba7d332', '2019-07-31', 0, 4, '2019-07-31', 'road-condition-violation', 400, '', '', '', '')

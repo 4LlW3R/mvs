@@ -1,0 +1,71 @@
+{
+  "type": "Feature",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "epsg:4326"
+    }
+  },
+  "id": "0",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          53.377290725709,
+          46.12257194519045
+        ],
+        [
+          53.377504348755885,
+          46.130277633667035
+        ],
+        [
+          53.37814903259376,
+          46.130277633666964
+        ],
+        [
+          53.378149032593775,
+          46.13693809509278
+        ],
+        [
+          53.36278724670506,
+          46.13690757751467
+        ],
+        [
+          53.35986900329685,
+          46.13479804992677
+        ],
+        [
+          53.35995292663668,
+          46.12257194519047
+        ],
+        [
+          53.377290725709,
+          46.12257194519045
+        ]
+      ]
+    ]
+  },
+  "properties": {
+    "Id": 0,
+    "ET_ID": "NEW - TCO 30 Zone 20 Tengiz FGP 3GP",
+    "FID_1": 0,
+    "ID_1": 1.0,
+    "Lon": 53.362785,
+    "Lat": 46.136906,
+    "Name": "NEW - TCO 30 Zone 20 Tengiz FGP 3GP",
+    "Type": "SpeedZone",
+    "ColourOnMa": "Black",
+    "Address": "Unnamed Road,  Kazakhstan",
+    "ContactNam": null,
+    "HomePhone": null,
+    "WorkPhone": null,
+    "MobilePhon": null,
+    "Email": null,
+    "Radius": null,
+    "speedLimit": 30.0,
+    "uuid": "2970c8c7-fe7e-4c64-8c57-b77c696c4934",
+    "version": 1,
+    "domain": "com.epam.tcodata.entity.geo.speedlimit"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Speed Limit Zone",
+  "id": "speedLimitZone.json",
+  "allOf": [
+    {
+      "$ref": "geojson.json"
+    },
+    {
+      "$ref": "definitions.json#/definitions/speedLimitZone"
+    },
+    {
+      "$ref": "definitions.json#/definitions/geojsonProperties"
+    }
+  ]
+}

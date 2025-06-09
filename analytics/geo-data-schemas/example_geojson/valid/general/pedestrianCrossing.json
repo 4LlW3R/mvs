@@ -1,0 +1,55 @@
+{
+    "type": "FeatureCollection",
+    "name": "pedestrianCrossing",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:EPSG::32639"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "road": "Drilling Base Internal Road",
+                "sign": "1.20",
+                "signDescription": "Pedestrian crossing",
+                "notes": null,
+                "uuid": "2970c8c7-fe7e-4c64-8c57-q22c545c4946",
+				"version": 1,
+				"domain": "com.epam.tcodata.entity.geo.pedestrian.crossing"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            686234.939699999988,
+                            5118358.433299999684
+                        ],
+                        [
+                            686234.2615,
+                            5118346.4688
+                        ],
+                        [
+                            686230.9002,
+                            5118346.6434
+                        ],
+                        [
+                            686222.518799999728799,
+                            5118347.105399999768
+                        ],
+                        [
+                            686223.439000000245869,
+                            5118359.069099999964
+                        ],
+                        [
+                            686234.939699999988,
+                            5118358.433299999684
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}

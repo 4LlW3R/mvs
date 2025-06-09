@@ -1,0 +1,19 @@
+[
+  "--class",
+  "com.epam.tcodata.analytics.overtaking.detection.OvertakingDetectionDriver",
+  "--name",
+  "Analytics_OvertakingDetection",
+  "--conf",
+  "spark.driver.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/Analytics_OvertakingDetection -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/overtaking-detection/log4j.properties",
+  "--conf",
+  "spark.executor.extraJavaOptions=-Dlog.path=file:/dbfs/mnt/mvsdatalaket332devtco3/tmp/logs/Analytics_OvertakingDetection -Dlog4j.configuration=wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/overtaking-detection/log4j.properties",
+  "wasbs://development@mvsdatalaket332devtco3.blob.core.windows.net/tco-mvs-deployment-1.8.0-RC/overtaking-detection/overtaking-detection-1.8.0-RC.jar",
+  "--appName",
+  "Analytics_OvertakingDetection",
+  "--factoryClassName",
+  "com.epam.tcodata.analytics.overtaking.detection.factory.impl.OvertakingDetectionFactory",
+  "--mode",
+  "stream",
+  "--batchIntervalSeconds",
+  "210"
+]

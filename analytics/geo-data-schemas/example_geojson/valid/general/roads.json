@@ -1,0 +1,62 @@
+{
+    "type": "FeatureCollection",
+    "name": "roads",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:EPSG::32639"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "road": "Drilling Base Internal Roads",
+                "owner": "RMPG",
+                "notes": null,
+                "roadCover": "Asphalt",
+                "shapeLength": 4380.0516335100001,
+                "uuid": "2970c8c7-fe7e-4c64-8c57-b88c545c4946",
+				"version": 1,
+				"domain": "com.epam.tcodata.entity.geo.road"
+            },
+            "geometry": {
+                "type": "MultiLineString",
+                "coordinates": [
+                    [
+                        [
+                            686512.128399999812245,
+                            5117879.925799999386
+                        ],
+                        [
+                            686865.843999999575317,
+                            5117854.5735
+                        ],
+                        [
+                            686975.457499999552965,
+                            5117847.409
+                        ]
+                    ],
+                    [
+                        [
+                            686512.128399999812245,
+                            5117879.925799999386
+                        ],
+                        [
+                            686512.628899999894202,
+                            5117913.8178
+                        ],
+                        [
+                            686516.597599999979,
+                            5118124.8234
+                        ],
+                        [
+                            686517.814899999648333,
+                            5118185.3956
+                        ]
+                    ]
+                ]
+            }
+        }
+    ]
+}
